@@ -32,13 +32,12 @@ const AboutPage = ({ data }) => {
   return (
     <div ref={sectionRef} style={{ background: '#fff' }}>
       <style>{`
-        /* PHASE 1: HERO STICKY */
-        .sticky-hero-layer {
-          position: -webkit-sticky !important; /* For Safari */
+        /* STICKY HELPERS */
+        .sticky-fix {
+          position: -webkit-sticky !important; /* Safari */
           position: sticky !important;
           top: 0 !important;
-          z-index: 1 !important;
-          width: 100%;
+          z-index: 5 !important;
         }
 
         @media (max-width: 1024px) {
@@ -55,13 +54,24 @@ const AboutPage = ({ data }) => {
           .intro-section {
             padding: 120px 20px 60px 20px !important;
           }
+          /* On mobile, don't stack sticky individually into each other */
+          .sticky-fix {
+            position: relative !important;
+            top: auto !important;
+          }
+          .mobile-sticky-group {
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 10 !important;
+            background: #fff;
+          }
         }
       `}</style>
 
-      {/* Intro Section - Relative to cover sticking hero */}
+      {/* Intro Section - Layer 10 */}
       <section className="intro-section" style={{ 
         position: 'relative',
-        zIndex: 10, // Must be higher than sticky layer
+        zIndex: 10,
         background: '#ffffff', 
         textAlign: 'left',
         padding: '180px 40px 100px 40px',
@@ -97,8 +107,14 @@ const AboutPage = ({ data }) => {
         </div>
       </section>
 
-      {/* Hero Banner - THE STICKY ELEMENT */}
-      <section className="about-hero-section sticky-hero-layer" style={{ height: '80vh' }}>
+      {/* Hero Banner - Layer 1 (Sticks behind Intro) */}
+      <section className="about-hero-section" style={{ 
+        position: 'sticky',
+        top: 0,
+        height: '80vh', 
+        zIndex: 1,
+        width: '100%'
+      }}>
         <img
           src="https://images.unsplash.com/photo-1504544750208-dc0358e63f7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
           alt="Restaurant interior"
@@ -108,10 +124,10 @@ const AboutPage = ({ data }) => {
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)' }} />
       </section>
 
-      {/* Sections following the Hero - Relative with Higher Z-index to slide OVER */}
+      {/* Chef Section - Layer 10 (Scrolls over Hero) */}
       <section style={{ 
         position: 'relative',
-        zIndex: 10, // Slide OVER sticky hero
+        zIndex: 10,
         background: '#ffffff', 
         padding: '120px 40px 80px 40px', 
         width: '100%' 
@@ -124,8 +140,9 @@ const AboutPage = ({ data }) => {
           gap: '60px',
           alignItems: 'flex-start'
         }}>
-          {/* Chef Section Content */}
-          <div className="fade-in">
+          
+          {/* Chef Title - Sticky on Desktop */}
+          <div className="fade-in sticky-fix">
             <h2 style={{
               fontFamily: '"Playfair Display", serif',
               fontSize: 'clamp(28px, 4vw, 36px)',
@@ -146,7 +163,8 @@ const AboutPage = ({ data }) => {
             }}>PASSIONATE CREATIVITY<br />FROM THE BRONX TO MIAMI</p>
           </div>
 
-          <div className="fade-in editorial-image-container" style={{ position: 'relative', overflow: 'hidden', height: '600px' }}>
+          {/* Chef Image - Sticky on Desktop */}
+          <div className="fade-in editorial-image-container sticky-fix" style={{ position: 'relative', overflow: 'hidden', height: '600px' }}>
             <img 
               src="/chef-about.png" 
               alt="Chef Nuno Grullon" 
@@ -154,6 +172,7 @@ const AboutPage = ({ data }) => {
             />
           </div>
 
+          {/* Narrative Bio - Normal Scroll */}
           <div className="fade-in" style={{ textAlign: 'left' }}>
             <p style={{
               fontFamily: '"Courier Prime", monospace',
@@ -165,10 +184,11 @@ const AboutPage = ({ data }) => {
             }} dangerouslySetInnerHTML={{ __html: "Chef Nuno Grullon, A New York native started working in restaurants at the early age of sixteen. Over the years while continuing expand his culinary knowledge and skill, started receiving recognition and accolades, appearing on Bravo's television show \"Best New Restaurant\" produced by Gordon Ramsay and has also toured central America with the culinary magazine \"Buen Provecho\". In 2019 Chef Nuno Grullon decided to put his skill and vision into his first business, on a unique corner of Biscayne Boulevard and NE 66th Street. Uptown 66 would become a welcome addition to Miami's Upper east Side MiMo District. Uptown 66 is an exploration of authentic Mexican street food through the lens of Chef Nuno.<br/><br/>Receiving national accreditation from Good Morning America with their birria taco winning \"Best Taco in America\". Despite the success of his first venture, Grullon had a vision for a much broader impact in Miami culinary and hospitality. Grullon set forward to bring a concept that would challenge him to push the boundaries of his skillset and creativity and showcase his culinary passion in a way Miami has yet to see fully. Grand Central would become the outlet for that passion. Opting for pure quality and perfect execution over innovation, Grullon would present American classics with subtle French influence raising the bar for what should be expected from the young restaurant group." }}>
             </p>
           </div>
+
         </div>
       </section>
 
-      {/* Final Passion Section */}
+      {/* Passion for Food Section */}
       <section style={{ 
         position: 'relative',
         zIndex: 10,
@@ -205,7 +225,7 @@ const AboutPage = ({ data }) => {
               letterSpacing: '0.02em',
               color: '#333'
             }}>
-              Every dish we serve is to showcase our passion for food. Our hand-pressed tortillas of heirloom corn from Oaxaca, award winning Birria, and silky chocolate churros.
+               Every dish we serve is to showcase our passion for food. Our hand-pressed tortillas of heirloom corn from Oaxaca, award winning Birria, and silky chocolate churros.
             </p>
           </div>
           <div className="fade-in editorial-image-container" style={{ position: 'relative', overflow: 'hidden', height: '650px' }}>
@@ -218,7 +238,7 @@ const AboutPage = ({ data }) => {
         </div>
       </section>
 
-      {/* Stretching Lifestyle Banner (Static) */}
+      {/* Stretching Lifestyle Banner */}
       <section style={{ position: 'relative', zIndex: 10, height: '70vh', background: '#fff' }}>
         <img 
           src="/about-lifestyle.png" 
