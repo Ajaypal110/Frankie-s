@@ -6,7 +6,7 @@ const ImageGrid = () => {
       position: 'relative',
       zIndex: 40, 
       backgroundColor: '#ffffff',
-      padding: '0',
+      padding: '0 0 16px 0',
       width: '100%',
     }}>
       <div 
@@ -14,12 +14,12 @@ const ImageGrid = () => {
         style={{
           display: 'flex',
           width: '100%',
-          gap: '0',
+          gap: '16px',
           padding: '0',
           boxSizing: 'border-box'
         }}>
         {/* Left Column */}
-        <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '0' }}>
+        <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <img 
             src="https://picsum.photos/id/163/800/600" 
             alt="Food 1" 
@@ -33,7 +33,7 @@ const ImageGrid = () => {
         </div>
 
         {/* Right Column */}
-        <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '0' }}>
+        <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <img 
             src="https://picsum.photos/id/493/800/1000" 
             alt="Food 3" 

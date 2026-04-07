@@ -44,14 +44,13 @@ const Navbar = () => {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          padding: '24px 15px', 
-          maxWidth: '1400px',
-          margin: '0 auto',
+          padding: '24px 40px',
           position: 'relative',
           height: '100%',
+          width: '100%',
         }}>
-          {/* Hamburger (Left) */}
-          <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-start' }}>
+          {/* Hamburger (Left Corner) */}
+          <div style={{ display: 'flex', justifyContent: 'flex-start', flex: 1 }}>
             <button
               className="hamburger"
               style={{ 
@@ -61,14 +60,13 @@ const Navbar = () => {
                 background: 'transparent', 
                 border: 'none', 
                 cursor: 'pointer', 
-                padding: '8px', 
+                padding: '0', 
                 zIndex: 60,
-                marginLeft: '-15px', 
               }}
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
             >
-              <svg width="62" height="42" viewBox="0 0 42 28" fill={textColor} style={{ 
+              <svg width="42" height="28" viewBox="0 0 42 28" fill={textColor} style={{ 
                 transition: 'fill 0.5s ease',
                 filter: 'drop-shadow(0px 1px 2px rgba(0,0,0,0.3))'
               }}>
@@ -79,7 +77,7 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Logo (Perfectly Centered) */}
+          {/* Logo (Centered) */}
           <Link to="/" style={{
             position: 'absolute',
             left: '50%',
@@ -101,7 +99,7 @@ const Navbar = () => {
             />
           </Link>
 
-          {/* Empty div for symmetry */}
+          {/* Empty spacer for symmetry */}
           <div style={{ flex: 1 }}></div>
         </nav>
       </header>
@@ -118,7 +116,7 @@ const Navbar = () => {
           <Link to="/" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Home</Link>
           <Link to="/about" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>About</Link>
           <Link to="/locations" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Locations</Link>
-          <Link to="/menu" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Menus</Link>
+          <Link to="/agourahillsmenu" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Menus</Link>
           <Link to="/press" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Press</Link>
           <a href="https://frankiesbreakfastburritos.toast.site/" target="_blank" rel="noopener noreferrer" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Order</a>
         </nav>

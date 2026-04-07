@@ -57,14 +57,10 @@ const PressPage = () => {
           gap: '60px 40px'
         }}>
           {pressItems.map((item, idx) => (
-            <a key={idx} href={item.url} target="_blank" rel="noopener noreferrer" style={{
+            <a key={idx} href={item.url} target="_blank" rel="noopener noreferrer" className="safe-hover-translate" style={{
               display: 'flex', flexDirection: 'column', textDecoration: 'none', color: 'inherit',
-              transition: 'transform 0.3s ease',
               cursor: 'pointer'
-            }}
-            onMouseOver={e => e.currentTarget.style.transform = 'translateY(-4px)'}
-            onMouseOut={e => e.currentTarget.style.transform = 'translateY(0)'}
-            >
+            }}>
               <div style={{ 
                 width: '100%', 
                 height: '320px', 

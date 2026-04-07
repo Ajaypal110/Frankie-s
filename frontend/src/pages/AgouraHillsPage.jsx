@@ -82,7 +82,7 @@ const AgouraHillsPage = () => {
               width: '100%' 
             }}>
               <Link 
-                to="/menu" 
+                to="/agourahillsmenu" 
                 className="agoura-menu-btn"
               >
                 View Menu

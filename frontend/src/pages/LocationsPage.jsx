@@ -6,7 +6,7 @@ const locations = [
     name: 'Agoura Hills',
     city: 'Agoura Hills',
     address: '28708 Roadside Drive, Agoura Hills, CA',
-    menuLink: '/agoura',
+    menuLink: '/agoura', // Force pointing to agoura page
     image: '/locations-agoura.png',
   },
 ];
@@ -19,7 +19,7 @@ const LocationsPage = () => {
       {/* Reduced Height Hero Section */}
       <section style={{
         position: 'relative', 
-        height: '35vh', // Significantly reduced height
+        height: '35vh',
         display: 'flex',
         alignItems: 'center', 
         justifyContent: 'center', 
@@ -29,11 +29,11 @@ const LocationsPage = () => {
         <h1 style={{
           color: '#F5F1EB', 
           fontFamily: '"Playfair Display", serif',
-          fontSize: 'clamp(32px, 5vw, 48px)', // Slightly smaller font
+          fontSize: 'clamp(32px, 5vw, 48px)',
           fontWeight: 400,
           letterSpacing: '0.15em', 
           textTransform: 'uppercase',
-          marginTop: '40px' // Adjust for navbar clearance if needed
+          marginTop: '40px'
         }}>Locations</h1>
       </section>
 
@@ -45,18 +45,14 @@ const LocationsPage = () => {
           gap: '60px',
         }}>
           {locations.map((loc, idx) => (
-            <Link key={idx} to={loc.menuLink} style={{ textDecoration: 'none', color: 'inherit', display: 'block', opacity: 1, visibility: 'visible' }}>
+            <Link key={idx} to="/agoura" style={{ textDecoration: 'none', color: 'inherit', display: 'block', opacity: 1, visibility: 'visible' }}>
               <div style={{
                 overflow: 'hidden', position: 'relative',
                 aspectRatio: '4/3', marginBottom: '24px',
               }}>
-                <img src={loc.image} alt={loc.name} style={{
+                <img src={loc.image} alt={loc.name} className="safe-hover-scale" style={{
                   width: '100%', height: '100%', objectFit: 'cover',
-                  transition: 'transform 0.6s ease',
-                }}
-                onMouseOver={e => e.currentTarget.style.transform = 'scale(1.05)'}
-                onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
-                />
+                }} />
               </div>
               <h3 style={{
                 fontFamily: '"Playfair Display", serif', fontSize: '28px',
@@ -73,9 +69,6 @@ const LocationsPage = () => {
                 fontWeight: 300, color: '#2d2d2d', letterSpacing: '0.02em',
                 marginBottom: '24px'
               }}>{loc.address}</p>
-              
-              {/* Removed the red MENU button as requested */}
-
             </Link>
           ))}
         </div>

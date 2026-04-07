@@ -10,7 +10,7 @@ import FollowUs from './components/FollowUs';
 import Footer from './components/Footer';
 import AboutPage from './pages/AboutPage';
 import LocationsPage from './pages/LocationsPage';
-import MenuPage from './pages/MenuPage';
+import AgouraHillsMenuPage from './pages/AgouraHillsMenuPage';
 import PressPage from './pages/PressPage';
 import AgouraHillsPage from './pages/AgouraHillsPage';
 
@@ -55,7 +55,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/locations" element={<LocationsPage />} />
-          <Route path="/menu" element={<MenuPage location="MiMo" />} />
+          <Route path="/agourahillsmenu" element={<AgouraHillsMenuPage location="Agoura Hills" />} />
           <Route path="/press" element={<PressPage />} />
           <Route path="/agoura" element={<AgouraHillsPage />} />
         </Routes>

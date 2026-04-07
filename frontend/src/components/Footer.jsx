@@ -30,15 +30,8 @@ const Footer = () => {
                 7100 BISCAYNE BLVD,<br />
                 MIAMI, FL 33138
               </p>
-              <a href="#" className="footer-map-link">VIEW ON MAP</a>
             </div>
 
-            <div className="footer-location-block">
-              <p className="footer-address">
-                COMING SOON:<br />
-                COCONUT GROVE
-              </p>
-            </div>
           </div>
 
           {/* Column 2: Navigation */}
@@ -48,7 +41,7 @@ const Footer = () => {
               <Link to="/" className="footer-link">HOME</Link>
               <Link to="/about" className="footer-link">ABOUT</Link>
               <Link to="/locations" className="footer-link">LOCATIONS</Link>
-              <Link to="/miamimenu" className="footer-link">MENUS</Link>
+              <Link to="/agourahillsmenu" className="footer-link">MENUS</Link>
               <Link to="/press" className="footer-link">PRESS</Link>
             </nav>
           </div>
@@ -69,11 +62,6 @@ const Footer = () => {
           <p className="footer-copy">
             &copy; {new Date().getFullYear()} FRANKIE'S BURRITO. ALL RIGHTS RESERVED.
           </p>
-          <div className="footer-soc-links">
-            <a href="#" className="footer-link">FB</a>
-            <a href="#" className="footer-link">IG</a>
-            <a href="#" className="footer-link">TW</a>
-          </div>
         </div>
       </div>
     </footer>
