@@ -78,40 +78,163 @@ const AboutPage = ({ data }) => {
         </div>
       </section>
 
-      {/* Hero Banner - Now serves as visual bridge */}
-      <section style={{
-        position: 'relative',
-        height: '65vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-      }}>
+      {/* Hero Banner - Sticky Parallax Visual Bridge */}
+      <section className="hero-section" style={{ height: '80vh', zIndex: 0 }}>
         <img
           src="https://images.unsplash.com/photo-1504544750208-dc0358e63f7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
           alt="Restaurant interior"
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+          className="hero-bg"
+          style={{ objectFit: 'cover' }}
         />
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)' }} />
       </section>
 
-      {/* Chef Section */}
-      <section style={{ background: '#1a1a1a', color: '#F5F1EB' }} className="section-padding">
-        <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-          <h2 className="fade-in" style={{
-            fontFamily: '"Playfair Display", serif', fontSize: 'clamp(28px, 4vw, 48px)',
-            fontWeight: 400, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '12px',
-          }}>{chefHeading}</h2>
-          <p className="fade-in" style={{
-            fontFamily: '"Montserrat", sans-serif', fontSize: '11px', fontWeight: 500,
-            letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '48px', color: '#8a8580',
-          }}>{chefSubheading}</p>
-          <p className="fade-in" style={{
-            fontFamily: '"Cormorant Garamond", serif', fontSize: 'clamp(15px, 1.6vw, 18px)',
-            fontWeight: 300, lineHeight: 2, letterSpacing: '0.03em',
-          }}>{chefBio}</p>
+      {/* Chef Section - New 3-Column Editorial Layout */}
+      <section style={{ 
+        position: 'relative',
+        zIndex: 10,
+        background: '#ffffff', 
+        padding: '120px 30px 80px 30px', 
+        width: '100%' 
+      }} className="section-padding">
+        <div style={{ 
+          maxWidth: '1400px', 
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr 1fr',
+          gap: '60px',
+          alignItems: 'flex-start'
+        }}>
+          
+          {/* Left: Chef Heading */}
+          <div className="fade-in sticky-col">
+            <h2 style={{
+              fontFamily: '"Playfair Display", serif',
+              fontSize: 'clamp(28px, 4vw, 36px)',
+              fontWeight: 700,
+              letterSpacing: '0.05em',
+              textTransform: 'uppercase',
+              color: '#1a1a1a',
+              marginBottom: '16px'
+            }}>CHEF NUNO GRULLON:</h2>
+            <p style={{
+              fontFamily: '"Montserrat", sans-serif',
+              fontSize: '11px',
+              fontWeight: 500,
+              letterSpacing: '0.3em',
+              textTransform: 'uppercase',
+              color: '#8a8580',
+              lineHeight: 2
+            }}>PASSIONATE CREATIVITY<br />FROM THE BRONX TO MIAMI</p>
+          </div>
+
+          {/* Center: Chef Portrait */}
+          <div className="fade-in sticky-col" style={{ position: 'relative', overflow: 'hidden', height: '600px' }}>
+            <img 
+              src="/chef-about.png" 
+              alt="Chef Nuno Grullon" 
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+            />
+          </div>
+
+          {/* Right: Narrative Bio */}
+          <div className="fade-in" style={{ textAlign: 'left' }}>
+            <p style={{
+              fontFamily: '"Courier Prime", monospace',
+              fontSize: '14px',
+              fontWeight: 400,
+              lineHeight: 1.8,
+              letterSpacing: '0.02em',
+              color: '#333'
+            }}>
+              Chef Nuno Grullon, A New York native started working in restaurants at the early age of sixteen. Over the years while continuing expand his culinary knowledge and skill, started receiving recognition and accolades, appearing on Bravo's television show "Best New Restaurant" produced by Gordon Ramsay and has also toured central America with the culinary magazine "Buen Provecho". In 2019 Chef Nuno Grullon decided to put his skill and vision into his first business, on a unique corner of Biscayne Boulevard and NE 66th Street. Uptown 66 would become a welcome addition to Miami's Upper east Side MiMo District. Uptown 66 is an exploration of authentic Mexican street food through the lens of Chef Nuno.
+              <br /><br />
+              Receiving national accreditation from Good Morning America with their birria taco winning "Best Taco in America". Despite the success of his first venture, Grullon had a vision for a much broader impact in Miami culinary and hospitality. Grullon set forward to bring a concept that would challenge him to push the boundaries of his skillset and creativity and showcase his culinary passion in a way Miami has yet to see fully. Grand Central would become the outlet for that passion. Opting for pure quality and perfect execution over innovation, Grullon would present American classics with subtle French influence raising the bar for what should be expected from the young restaurant group.
+            </p>
+          </div>
+
         </div>
       </section>
+
+      {/* Passion for Food Section - Continuation of Story */}
+      <section style={{ 
+        position: 'relative',
+        zIndex: 10,
+        background: '#ffffff', 
+        padding: '40px 30px 40px 30px', 
+        width: '100%' 
+      }} className="section-padding">
+        <div style={{ 
+          maxWidth: '1400px', 
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr 1fr',
+          gap: '60px',
+          alignItems: 'flex-start'
+        }}>
+          
+          {/* Left: Illustration Column */}
+          <div style={{ textAlign: 'left', paddingTop: '40px' }}>
+            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="0.5" strokeLinecap="round" strokeLinejoin="round">
+              {/* Simple stylized salt/pepper shaker sketch */}
+              <circle cx="7.5" cy="5.5" r="0.4" fill="#1a1a1a" />
+              <circle cx="8.5" cy="5.5" r="0.4" fill="#1a1a1a" />
+              <path d="M6 7.5h4v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V7.5z" />
+              <path d="M7 4.5h2v3H7z" />
+              
+              <circle cx="15.5" cy="5.5" r="0.4" fill="#1a1a1a" />
+              <circle cx="16.5" cy="5.5" r="0.4" fill="#1a1a1a" />
+              <path d="M14 7.5h4v12a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V7.5z" />
+              <path d="M15 4.5h2v3h-2z" />
+            </svg>
+          </div>
+
+          {/* Center: Story Continuation */}
+          <div style={{ textAlign: 'left' }}>
+            <p style={{
+              fontFamily: '"Courier Prime", monospace',
+              fontSize: '14px',
+              fontWeight: 400,
+              lineHeight: 2,
+              letterSpacing: '0.02em',
+              color: '#333'
+            }}>
+              From our hand-pressed tortillas of heirloom corn from Oaxaca, to our award winning Birria made with short-rib, oxtail and beef cheek slow-braised overnight with our selection of Mexican chilis. It only begins there, this diverse menu has many fan favorites all made from scratch.
+              <br /><br />
+              From the notorious steak burrito to our famous loaded nachos layered with house made cheese sauce. Always leave room for dessert, light airy churros dipped in silky chocolate sauce, creamy caramel flan and a tres leches like you've never had before. Every dish we serve is to showcase our passion for food.
+            </p>
+          </div>
+
+          {/* Right: Food Lifestyle Image */}
+          <div style={{ position: 'relative', overflow: 'hidden', height: '650px' }}>
+            <img 
+              src="/food-passion.png" 
+              alt="Frankie's culinary spread" 
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+            />
+          </div>
+
+        </div>
+      </section>
+
+      {/* Finishing Lifestyle Banner - Sticky Parallax */}
+      <section className="hero-section" style={{ height: '70vh', zIndex: 0 }}>
+        <img 
+          src="/about-lifestyle.png" 
+          alt="Outdoor dining at Frankie's" 
+          className="hero-bg"
+          style={{ objectFit: 'cover' }} 
+        />
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.1)' }} />
+      </section>
+
+      {/* Smaller Spacing before Footer */}
+      <div style={{ 
+        position: 'relative', 
+        zIndex: 10, 
+        height: '20px', 
+        background: '#ffffff' 
+      }} />
     </div>
   );
 };

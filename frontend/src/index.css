@@ -548,4 +548,11 @@ h1, h2, h3, h4, h5, h6 {
   .image-grid-container {
     flex-direction: column !important;
   }
+}/* ========== STICKY ELEMENTS ========== */
+@media (min-width: 1024px) {
+  .sticky-col {
+    position: sticky !important;
+    top: 130px !important;
+    align-self: flex-start !important;
+  }
 }
