@@ -6,6 +6,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === '/';
+  const isAbout = location.pathname === '/about';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,8 +22,9 @@ const Navbar = () => {
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
-  // User requested full transparency at all times
-  const textColor = scrolled ? '#1a1a1a' : '#F5F1EB';
+  // Use dark colors if scrolled OR on the About page (which has a white top)
+  const isDarkTheme = scrolled || isAbout;
+  const textColor = isDarkTheme ? '#1a1a1a' : '#F5F1EB';
 
   return (
     <>
@@ -92,7 +94,7 @@ const Navbar = () => {
               style={{
                 height: 'clamp(40px, 10vw, 65px)',
                 width: 'auto',
-                filter: scrolled ? 'none' : 'brightness(0) invert(1)',
+                filter: isDarkTheme ? 'none' : 'brightness(0) invert(1)',
                 transition: 'filter 0.5s ease',
               }} 
             />

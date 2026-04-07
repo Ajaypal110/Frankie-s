@@ -37,10 +37,51 @@ const AboutPage = ({ data }) => {
 
   return (
     <div ref={sectionRef}>
-      {/* Hero Banner */}
+      {/* Intro Section - Now at top */}
+      <section className="section-padding" style={{ 
+        background: '#ffffff', 
+        textAlign: 'left',
+        padding: '180px 30px 100px 30px',
+        width: '100%'
+      }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+          <h1 className="fade-in" style={{
+            fontFamily: '"Playfair Display", serif',
+            fontSize: 'clamp(28px, 4vw, 42px)',
+            fontWeight: 700,
+            letterSpacing: '0.05em',
+            textTransform: 'uppercase',
+            marginBottom: '60px',
+            color: '#1a1a1a'
+          }}>GET TO KNOW US</h1>
+          
+          <div style={{ maxWidth: '1250px' }}>
+            <p className="fade-in" style={{
+              fontFamily: '"Courier Prime", monospace', 
+              fontSize: '15px',
+              fontWeight: 400, 
+              lineHeight: 2.2, 
+              letterSpacing: '0.02em', 
+              color: '#333',
+              marginBottom: '40px'
+            }}>{intro}</p>
+            
+            <p className="fade-in" style={{
+              fontFamily: '"Courier Prime", monospace', 
+              fontSize: '15px',
+              fontWeight: 400, 
+              lineHeight: 2.2, 
+              letterSpacing: '0.02em', 
+              color: '#333'
+            }}>{story}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Hero Banner - Now serves as visual bridge */}
       <section style={{
         position: 'relative',
-        height: '60vh',
+        height: '65vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -51,27 +92,7 @@ const AboutPage = ({ data }) => {
           alt="Restaurant interior"
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
         />
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.4)' }} />
-        <h1 className="fade-in" style={{
-          position: 'relative', zIndex: 2, color: '#F5F1EB',
-          fontFamily: '"Playfair Display", serif', fontSize: 'clamp(36px, 6vw, 72px)',
-          fontWeight: 400, letterSpacing: '0.15em', textTransform: 'uppercase',
-        }}>Get To Know Us</h1>
-      </section>
-
-      {/* Intro Section */}
-      <section className="section-padding" style={{ background: '#F5F1EB', textAlign: 'center' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <p className="fade-in" style={{
-            fontFamily: '"Cormorant Garamond", serif', fontSize: 'clamp(17px, 2vw, 22px)',
-            fontWeight: 300, lineHeight: 2, letterSpacing: '0.04em', color: '#2d2d2d',
-          }}>{intro}</p>
-          <div style={{ width: '40px', height: '1px', background: 'rgba(26,26,26,0.2)', margin: '48px auto' }} />
-          <p className="fade-in" style={{
-            fontFamily: '"Cormorant Garamond", serif', fontSize: 'clamp(15px, 1.6vw, 18px)',
-            fontWeight: 300, lineHeight: 2, letterSpacing: '0.03em', color: '#8a8580',
-          }}>{story}</p>
-        </div>
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)' }} />
       </section>
 
       {/* Chef Section */}
