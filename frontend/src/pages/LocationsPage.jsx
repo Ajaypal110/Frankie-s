@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const locations = [
   {
-    name: 'MiMo',
-    city: 'Miami',
-    address: '6600 Biscayne Blvd, Miami, FL 33138',
-    menuLink: '/miamimenu',
-    image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    name: 'Agoura Hills',
+    city: 'Agoura Hills',
+    address: '28708 Roadside Drive, Agoura Hills, CA',
+    menuLink: '/agoura',
+    image: '/locations-agoura.png',
   },
 ];
 
@@ -34,21 +35,17 @@ const LocationsPage = () => {
           textTransform: 'uppercase',
           marginTop: '40px' // Adjust for navbar clearance if needed
         }}>Locations</h1>
-        <div style={{
-          position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)',
-          width: '6px', height: '6px', borderRadius: '50%', background: '#F5F1EB', opacity: 0.4,
-        }} />
       </section>
 
-      {/* Location Cards Grid */}
+      {/* Location Card Grid (Scaled Down) */}
       <section className="section-padding" style={{ background: '#F5F1EB' }}>
         <div style={{
-          maxWidth: '1100px', margin: '0 auto',
-          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+          maxWidth: '600px', margin: '0 auto',
+          display: 'grid', gridTemplateColumns: '1fr',
           gap: '60px',
         }}>
           {locations.map((loc, idx) => (
-            <a key={idx} href={loc.menuLink} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
+            <Link key={idx} to={loc.menuLink} style={{ textDecoration: 'none', color: 'inherit', display: 'block', opacity: 1, visibility: 'visible' }}>
               <div style={{
                 overflow: 'hidden', position: 'relative',
                 aspectRatio: '4/3', marginBottom: '24px',
@@ -74,8 +71,12 @@ const LocationsPage = () => {
               <p style={{
                 fontFamily: '"Cormorant Garamond", serif', fontSize: '15px',
                 fontWeight: 300, color: '#2d2d2d', letterSpacing: '0.02em',
+                marginBottom: '24px'
               }}>{loc.address}</p>
-            </a>
+              
+              {/* Removed the red MENU button as requested */}
+
+            </Link>
           ))}
         </div>
       </section>

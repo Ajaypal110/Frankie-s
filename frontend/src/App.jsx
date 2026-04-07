@@ -13,6 +13,7 @@ import LocationsPage from './pages/LocationsPage';
 import MenuPage from './pages/MenuPage';
 import PressPage from './pages/PressPage';
 import OrderPage from './pages/OrderPage';
+import AgouraHillsPage from './pages/AgouraHillsPage';
 
 const WP_API_URL = 'http://localhost:8884/wp-json/wp/v2';
 
@@ -55,11 +56,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/locations" element={<LocationsPage />} />
-          <Route path="/miamimenu" element={<MenuPage location="MiMo" />} />
-          <Route path="/hallandalemenu" element={<MenuPage location="Hallandale" />} />
           <Route path="/menu" element={<MenuPage location="MiMo" />} />
           <Route path="/press" element={<PressPage />} />
           <Route path="/order" element={<OrderPage />} />
+          <Route path="/agoura" element={<AgouraHillsPage />} />
         </Routes>
       </main>
       <Footer />

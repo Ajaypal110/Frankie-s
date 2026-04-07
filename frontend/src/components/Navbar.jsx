@@ -117,7 +117,7 @@ const Navbar = () => {
           <Link to="/" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Home</Link>
           <Link to="/about" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>About</Link>
           <Link to="/locations" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Locations</Link>
-          <Link to="/miamimenu" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Menus</Link>
+          <Link to="/menu" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Menus</Link>
           <Link to="/press" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Press</Link>
           <Link to="/order" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Order</Link>
         </nav>
