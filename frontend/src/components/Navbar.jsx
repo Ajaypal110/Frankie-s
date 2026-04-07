@@ -8,6 +8,7 @@ const Navbar = () => {
   const isHome = location.pathname === '/';
   const isAbout = location.pathname === '/about';
   const isPress = location.pathname === '/press';
+  const isMenu = location.pathname === '/agourahillsmenu';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,8 +24,8 @@ const Navbar = () => {
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
-  // Use dark colors if scrolled OR on the About/Press pages (which have a white top)
-  const isDarkTheme = scrolled || isAbout || isPress;
+  // Use dark colors if scrolled OR on the About/Press/Menu pages (which have a white top)
+  const isDarkTheme = scrolled || isAbout || isPress || isMenu;
   const textColor = isDarkTheme ? '#1a1a1a' : '#F5F1EB';
 
   return (
