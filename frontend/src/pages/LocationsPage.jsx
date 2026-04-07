@@ -8,13 +8,6 @@ const locations = [
     menuLink: '/miamimenu',
     image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
   },
-  {
-    name: 'Hallandale',
-    city: 'Hallandale Beach',
-    address: '801 N Federal Hwy Suite 109-110, Hallandale Beach, FL 33009',
-    menuLink: '/hallandalemenu',
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  },
 ];
 
 const LocationsPage = () => {
@@ -22,25 +15,32 @@ const LocationsPage = () => {
 
   return (
     <div>
-      {/* Hero */}
+      {/* Reduced Height Hero Section */}
       <section style={{
-        position: 'relative', height: '50vh', display: 'flex',
-        alignItems: 'center', justifyContent: 'center', overflow: 'hidden',
+        position: 'relative', 
+        height: '35vh', // Significantly reduced height
+        display: 'flex',
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        overflow: 'hidden',
         background: '#1a1a1a',
       }}>
         <h1 style={{
-          color: '#F5F1EB', fontFamily: '"Playfair Display", serif',
-          fontSize: 'clamp(36px, 6vw, 72px)', fontWeight: 400,
-          letterSpacing: '0.15em', textTransform: 'uppercase',
+          color: '#F5F1EB', 
+          fontFamily: '"Playfair Display", serif',
+          fontSize: 'clamp(32px, 5vw, 48px)', // Slightly smaller font
+          fontWeight: 400,
+          letterSpacing: '0.15em', 
+          textTransform: 'uppercase',
+          marginTop: '40px' // Adjust for navbar clearance if needed
         }}>Locations</h1>
-        {/* Decorative dot */}
         <div style={{
-          position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)',
+          position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)',
           width: '6px', height: '6px', borderRadius: '50%', background: '#F5F1EB', opacity: 0.4,
         }} />
       </section>
 
-      {/* Location Cards */}
+      {/* Location Cards Grid */}
       <section className="section-padding" style={{ background: '#F5F1EB' }}>
         <div style={{
           maxWidth: '1100px', margin: '0 auto',
