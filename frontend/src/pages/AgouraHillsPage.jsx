@@ -9,6 +9,29 @@ const AgouraHillsPage = () => {
 
   return (
     <div style={{ background: '#F5F1EB', minHeight: '100vh', opacity: 1, visibility: 'visible' }}>
+      <style>{`
+        .agoura-grid-item {
+          text-align: left;
+        }
+        .agoura-happy-hour {
+          text-align: right;
+        }
+        
+        @media (max-width: 768px) {
+          .agoura-grid-container {
+            grid-template-columns: 1fr !important;
+            gap: 40px !important;
+            text-align: left !important;
+          }
+          .agoura-grid-item, .agoura-happy-hour {
+            text-align: left !important;
+          }
+          .agoura-narrative-section {
+            padding: 60px 20px !important;
+          }
+        }
+      `}</style>
+
       {/* Premium Hero Section */}
       <section style={{ 
         position: 'relative', 
@@ -54,8 +77,8 @@ const AgouraHillsPage = () => {
         </div>
       </section>
 
-      {/* Narrative Section - Normal Padding */}
-      <section style={{ 
+      {/* Narrative Section */}
+      <section className="agoura-narrative-section" style={{ 
         background: '#ffffff',
         padding: '80px 40px 100px 40px' 
       }}>
@@ -73,7 +96,7 @@ const AgouraHillsPage = () => {
               Nestled in the heart of the Santa Monica Mountains canyons, <span style={{ fontWeight: 700 }}>Frankies Agoura Hills</span> brings the award-winning street food soul of MiMo to the West Coast. With a focus on rugged mountain aesthetics and modern rustic charm, it's a destination for those who appreciate pure quality and cinematic atmosphere.
             </p>
             
-            {/* 1. FRESH BUTTON IMPLEMENTATION - RE-CREATED FROM SCRATCH */}
+            {/* Menu Button */}
             <div style={{ 
               marginTop: '60px', 
               marginBottom: '40px',
@@ -90,16 +113,15 @@ const AgouraHillsPage = () => {
             </div>
 
             {/* Hours & Location Grid */}
-            <div style={{ 
+            <div className="agoura-grid-container" style={{ 
               display: 'grid', 
               gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-              textAlign: 'left',
               gap: '60px',
               borderTop: '1px solid #eee',
               paddingTop: '60px'
             }}>
               {/* Hours section */}
-              <div>
+              <div className="agoura-grid-item">
                 <h4 style={{
                   fontFamily: '"Courier Prime", monospace',
                   fontSize: '20px',
@@ -120,7 +142,7 @@ const AgouraHillsPage = () => {
               </div>
 
               {/* Happy Hour section */}
-              <div style={{ textAlign: 'right' }}>
+              <div className="agoura-happy-hour">
                 <h4 style={{
                   fontFamily: '"Courier Prime", monospace',
                   fontSize: '20px',

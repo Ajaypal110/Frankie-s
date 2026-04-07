@@ -59,12 +59,6 @@ const AboutPage = ({ data }) => {
             position: relative !important;
             top: auto !important;
           }
-          .mobile-sticky-group {
-            position: sticky !important;
-            top: 0 !important;
-            z-index: 10 !important;
-            background: #fff;
-          }
         }
       `}</style>
 
@@ -193,7 +187,7 @@ const AboutPage = ({ data }) => {
         position: 'relative',
         zIndex: 10,
         background: '#ffffff', 
-        padding: '40px 40px 80px 40px', 
+        padding: '40px 40px 120px 40px', 
         width: '100%' 
       }} className="section-padding">
         <div className="about-editorial-grid" style={{ 
@@ -205,27 +199,33 @@ const AboutPage = ({ data }) => {
           alignItems: 'flex-start'
         }}>
           <div style={{ textAlign: 'left', paddingTop: '40px' }} className="fade-in">
-            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="0.5" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="7.5" cy="5.5" r="0.4" fill="#1a1a1a" />
-              <circle cx="8.5" cy="5.5" r="0.4" fill="#1a1a1a" />
-              <path d="M6 7.5h4v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V7.5z" />
-              <path d="M7 4.5h2v3H7z" />
-              <circle cx="15.5" cy="5.5" r="0.4" fill="#1a1a1a" />
-              <circle cx="16.5" cy="5.5" r="0.4" fill="#1a1a1a" />
-              <path d="M14 7.5h4v12a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V7.5z" />
-              <path d="M15 4.5h2v3h-2z" />
+            {/* UPDATED SVG TO MATCH IMAGE 2 STYLE */}
+            <svg width="100" height="auto" viewBox="0 0 80 100" fill="none" stroke="#1a1a1a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              {/* Left Shaker */}
+              <path d="M20 35 V80 C20 85.5 24.5 90 30 90 C35.5 90 40 85.5 40 80 V35 H20Z" />
+              <rect x="26" y="25" width="8" height="10" rx="1" />
+              <line x1="28" y1="29" x2="32" y2="29" strokeWidth="1.5" />
+              <line x1="28" y1="31" x2="32" y2="31" strokeWidth="1.5" />
+
+              {/* Right Shaker */}
+              <path d="M50 35 V80 C50 85.5 54.5 90 60 90 C65.5 90 70 85.5 70 80 V35 H50Z" />
+              <rect x="56" y="25" width="8" height="10" rx="1" />
+              <line x1="58" y1="29" x2="62" y2="29" strokeWidth="1.5" />
+              <line x1="58" y1="31" x2="62" y2="31" strokeWidth="1.5" />
             </svg>
           </div>
           <div style={{ textAlign: 'left' }} className="fade-in">
             <p style={{
               fontFamily: '"Courier Prime", monospace',
-              fontSize: '14px',
+              fontSize: '15px',
               fontWeight: 400,
-              lineHeight: 2,
+              lineHeight: 2.2,
               letterSpacing: '0.02em',
               color: '#333'
             }}>
-               Every dish we serve is to showcase our passion for food. Our hand-pressed tortillas of heirloom corn from Oaxaca, award winning Birria, and silky chocolate churros.
+               At Frankie's, every dish we serve is a testament to our unwavering passion for food and authentic Mexican tradition. It begins with our hand-pressed tortillas, crafted from heirloom corn sourced directly from Oaxaca, and extends to our award-winning Birria—slow-braised for hours with a proprietary blend of Mexican chilis. 
+               <br/><br/>
+               Whether it's the notorious steak burrito or our famous loaded nachos layered with house-made cheese sauce, every ingredient is chosen for its quality and flavor. And of course, we always invite you to leave room for dessert: light, airy churros dipped in silky chocolate sauce, creamy caramel flan, and a tres leches cake that redefines the classic.
             </p>
           </div>
           <div className="fade-in editorial-image-container" style={{ position: 'relative', overflow: 'hidden', height: '650px' }}>
