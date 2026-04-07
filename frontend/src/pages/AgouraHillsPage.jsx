@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import SlidingGallery from '../components/SlidingGallery';
 
 const AgouraHillsPage = () => {
   useEffect(() => {
@@ -53,10 +54,10 @@ const AgouraHillsPage = () => {
         </div>
       </section>
 
-      {/* Narrative Section - Increased Padding for Logo Clearance */}
+      {/* Narrative Section - Normal Padding */}
       <section style={{ 
         background: '#ffffff',
-        padding: '180px 40px 100px 40px' // Increased top padding
+        padding: '80px 40px 100px 40px' 
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
@@ -75,39 +76,14 @@ const AgouraHillsPage = () => {
             {/* 1. FRESH BUTTON IMPLEMENTATION - RE-CREATED FROM SCRATCH */}
             <div style={{ 
               marginTop: '60px', 
-              marginBottom: '100px',
+              marginBottom: '40px',
               display: 'flex',
               justifyContent: 'center',
               width: '100%' 
             }}>
               <Link 
                 to="/menu" 
-                style={{ 
-                  display: 'inline-block',
-                  backgroundColor: '#8b0000', // Frankie's Signature Brand Red
-                  color: '#ffffff',
-                  padding: '20px 80px',
-                  fontFamily: '"Courier Prime", monospace',
-                  fontSize: '16px',
-                  fontWeight: 700,
-                  textDecoration: 'none',
-                  letterSpacing: '0.25em',
-                  textTransform: 'uppercase',
-                  border: 'none',
-                  boxShadow: '0 12px 40px rgba(139, 0, 0, 0.25)',
-                  transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                  cursor: 'pointer'
-                }}
-                onMouseOver={e => {
-                  e.currentTarget.style.backgroundColor = '#a00000';
-                  e.currentTarget.style.transform = 'translateY(-4px)';
-                  e.currentTarget.style.boxShadow = '0 15px 50px rgba(139, 0, 0, 0.35)';
-                }}
-                onMouseOut={e => {
-                  e.currentTarget.style.backgroundColor = '#8b0000';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 12px 40px rgba(139, 0, 0, 0.25)';
-                }}
+                className="agoura-menu-btn"
               >
                 View Menu
               </Link>
@@ -165,6 +141,9 @@ const AgouraHillsPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Slideable Gallery Section */}
+      <SlidingGallery />
     </div>
   );
 };

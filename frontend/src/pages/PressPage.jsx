@@ -2,24 +2,32 @@ import React, { useEffect } from 'react';
 
 const pressItems = [
   {
-    source: 'MIAMI HERALD',
-    headline: 'This outdoor Mexican restaurant just won a national TV contest for best taco',
-    url: '#',
+    image: 'https://images.unsplash.com/photo-1577219491135-ce391730fb2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    source: 'WHAT NOW LOS ANGELES',
+    headline: "Frankie's Breakfast Burritos Opening at The Roadside Plaza",
+    description: "The much-anticipated Frankie's Breakfast Burritos brings its iconic, award-winning street food flavors to Agoura Hills, expanding its footprint with a new permanent home.",
+    url: 'https://whatnow.com/los-angeles/restaurants/frankies-breakfast-burritos-opening-at-the-roadside-plaza/',
   },
   {
-    source: 'MIAMI NEW TIMES',
-    headline: "Miami's 2022 Best Tacos",
-    url: '#',
+    image: 'https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    source: 'YOUTUBE / LOCAL NEWS',
+    headline: "Watch Frankie's Breakfast Burritos Featured Live on Morning Broadcasting",
+    description: "Catch Frankie's on local TV as the team showcases the authentic marinades, fresh ingredients, and vibrant Mexican culture that go into perfectly rolling an award-winning breakfast burrito.",
+    url: 'https://www.youtube.com/watch?v=m9sP_EKcGOI',
   },
   {
-    source: 'MIAMI NEW TIMES',
-    headline: 'Good Morning America Proclaims Miami Taqueria Tops in U.S.',
-    url: '#',
+    image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    source: 'INSTAGRAM',
+    headline: "Join the Frankie's Community and Follow the Journey on Instagram",
+    description: "Follow us @frankiesburritos to catch our daily menu specials, vibrant community moments, and exclusive behind-the-scenes content straight from our lively West Coast kitchen.",
+    url: 'https://www.instagram.com/frankiesburritos/',
   },
   {
-    source: 'BROKEN PALATE',
-    headline: 'A Miami Taco Place is Crowned Number One',
-    url: '#',
+    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    source: 'ORDER ONLINE',
+    headline: "Craving Frankie's? Order Ahead for Pickup via Toast",
+    description: "Our integrated Toast platform makes it easier than ever to get your hands on our renowned burritos. Place your order online right now to skip the queue and grab your food hot and fresh.",
+    url: 'https://frankiesbreakfastburritos.toast.site/',
   },
 ];
 
@@ -30,38 +38,69 @@ const PressPage = () => {
     <div>
       {/* Header */}
       <section style={{
-        background: '#1a1a1a', color: '#F5F1EB', textAlign: 'center',
-        paddingTop: '140px', paddingBottom: '80px', paddingLeft: '24px', paddingRight: '24px',
+        background: '#ffffff', color: '#1a1a1a', textAlign: 'center',
+        paddingTop: '160px', paddingBottom: '40px', paddingLeft: '24px', paddingRight: '24px',
       }}>
         <h1 style={{
-          fontFamily: '"Playfair Display", serif', fontSize: 'clamp(36px, 6vw, 72px)',
+          fontFamily: '"Playfair Display", serif', fontSize: 'clamp(20px, 3vw, 32px)',
           fontWeight: 400, letterSpacing: '0.15em', textTransform: 'uppercase',
         }}>Press</h1>
       </section>
 
-      {/* Press Items */}
-      <section style={{ background: '#F5F1EB', padding: '80px 24px' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+      {/* Press Grid */}
+      <section style={{ background: '#ffffff', padding: '0 40px 100px 40px' }}>
+        <div style={{ 
+          maxWidth: '1200px', 
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(450px, 1fr))',
+          gap: '60px 40px'
+        }}>
           {pressItems.map((item, idx) => (
             <a key={idx} href={item.url} target="_blank" rel="noopener noreferrer" style={{
-              display: 'block', textDecoration: 'none', color: 'inherit',
-              padding: '40px 0',
-              borderBottom: idx < pressItems.length - 1 ? '1px solid rgba(26,26,26,0.1)' : 'none',
-              transition: 'opacity 0.3s ease',
+              display: 'flex', flexDirection: 'column', textDecoration: 'none', color: 'inherit',
+              transition: 'transform 0.3s ease',
+              cursor: 'pointer'
             }}
-            onMouseOver={e => e.currentTarget.style.opacity = '0.6'}
-            onMouseOut={e => e.currentTarget.style.opacity = '1'}
+            onMouseOver={e => e.currentTarget.style.transform = 'translateY(-4px)'}
+            onMouseOut={e => e.currentTarget.style.transform = 'translateY(0)'}
             >
+              <div style={{ 
+                width: '100%', 
+                height: '320px', 
+                borderRadius: '24px', 
+                overflow: 'hidden',
+                backgroundColor: '#eee',
+                marginBottom: '24px'
+              }}>
+                <img 
+                  src={item.image} 
+                  alt={item.source}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                />
+              </div>
+              
               <p style={{
-                fontFamily: '"Montserrat", sans-serif', fontSize: '10px',
-                fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase',
-                color: '#8a8580', marginBottom: '12px',
+                fontFamily: '"Courier Prime", monospace', fontSize: '18px',
+                fontWeight: 700, textTransform: 'uppercase',
+                color: '#000', marginBottom: '16px',
               }}>{item.source}</p>
+              
               <h3 style={{
-                fontFamily: '"Playfair Display", serif', fontSize: 'clamp(20px, 2.5vw, 28px)',
-                fontWeight: 400, letterSpacing: '0.06em', lineHeight: 1.5,
-                color: '#1a1a1a',
+                fontFamily: '"Courier Prime", monospace', fontSize: '16px',
+                fontWeight: 700, lineHeight: 1.6,
+                color: '#1a1a1a', marginBottom: '12px',
               }}>{item.headline}</h3>
+              
+              <p style={{
+                fontFamily: '"Times New Roman", Times, serif', fontSize: '16px',
+                fontWeight: 400, lineHeight: 1.6,
+                color: '#444',
+              }}>{item.description}</p>
             </a>
           ))}
         </div>

@@ -7,6 +7,7 @@ const Navbar = () => {
   const location = useLocation();
   const isHome = location.pathname === '/';
   const isAbout = location.pathname === '/about';
+  const isPress = location.pathname === '/press';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,8 +23,8 @@ const Navbar = () => {
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
-  // Use dark colors if scrolled OR on the About page (which has a white top)
-  const isDarkTheme = scrolled || isAbout;
+  // Use dark colors if scrolled OR on the About/Press pages (which have a white top)
+  const isDarkTheme = scrolled || isAbout || isPress;
   const textColor = isDarkTheme ? '#1a1a1a' : '#F5F1EB';
 
   return (
@@ -119,7 +120,7 @@ const Navbar = () => {
           <Link to="/locations" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Locations</Link>
           <Link to="/menu" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Menus</Link>
           <Link to="/press" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Press</Link>
-          <Link to="/order" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Order</Link>
+          <a href="https://frankiesbreakfastburritos.toast.site/" target="_blank" rel="noopener noreferrer" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Order</a>
         </nav>
 
       </div>

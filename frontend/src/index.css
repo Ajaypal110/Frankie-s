@@ -177,6 +177,31 @@ h1, h2, h3, h4, h5, h6 {
   color: #1a1a1a;
 }
 
+/* ========== AGOURA MENU BUTTON ========== */
+.agoura-menu-btn {
+  display: inline-block;
+  background-color: #1a1a1a;
+  color: #F5F1EB !important;
+  padding: 20px 80px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  border: none;
+  box-shadow: 0 12px 40px rgba(26, 26, 26, 0.15);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.agoura-menu-btn:hover {
+  background-color: #2d2d2d;
+  transform: translateY(-4px);
+  box-shadow: 0 15px 50px rgba(26, 26, 26, 0.25);
+}
+
 /* ========== TABLE TALK ========== */
 .talk-section {
   position: relative;
