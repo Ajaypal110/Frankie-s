@@ -41,12 +41,13 @@ const Navbar = () => {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          padding: '24px 20px', // Reduced side padding to move hamburger closer to the edge
+          padding: '24px 15px', 
           maxWidth: '1400px',
           margin: '0 auto',
           position: 'relative',
+          height: '100%',
         }}>
-          {/* Hamburger (visible on all screens, aligned left) */}
+          {/* Hamburger (Left) */}
           <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-start' }}>
             <button
               className="hamburger"
@@ -58,13 +59,16 @@ const Navbar = () => {
                 border: 'none', 
                 cursor: 'pointer', 
                 padding: '8px', 
-                zIndex: 10,
-                marginLeft: '-10px', // Pull it slightly tighter into the corner
+                zIndex: 60,
+                marginLeft: '-15px', 
               }}
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
             >
-              <svg width="54" height="36" viewBox="0 0 42 28" fill={textColor} style={{ transition: 'fill 0.5s ease' }}>
+              <svg width="62" height="42" viewBox="0 0 42 28" fill={textColor} style={{ 
+                transition: 'fill 0.5s ease',
+                filter: 'drop-shadow(0px 1px 2px rgba(0,0,0,0.3))'
+              }}>
                 <path d="M 2,4 Q 15,3 40,4.5 Q 25,6.5 2,6 Z" />
                 <path d="M 1,14 Q 20,15 41,13.5 Q 25,16 1,15 Z" />
                 <path d="M 3,23.5 Q 15,22 39,24 Q 20,26 3,24.5 Z" />
@@ -72,18 +76,21 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Logo (Centered) */}
+          {/* Logo (Perfectly Centered) */}
           <Link to="/" style={{
             position: 'absolute',
             left: '50%',
-            transform: 'translateX(-50%)',
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
             zIndex: 10,
+            display: 'flex',
+            alignItems: 'center',
           }}>
             <img 
               src="/logo.png" 
               alt="Frankie's Logo" 
               style={{
-                height: '50px',
+                height: 'clamp(40px, 10vw, 65px)',
                 width: 'auto',
                 filter: scrolled ? 'none' : 'brightness(0) invert(1)',
                 transition: 'filter 0.5s ease',
@@ -91,7 +98,7 @@ const Navbar = () => {
             />
           </Link>
 
-          {/* Empty div to balance flex layout */}
+          {/* Empty div for symmetry */}
           <div style={{ flex: 1 }}></div>
         </nav>
       </header>
@@ -99,7 +106,7 @@ const Navbar = () => {
       {/* Mobile Menu Overlay */}
       <div className={`mobile-menu-overlay ${mobileOpen ? 'open' : ''}`}>
         <button className="mobile-close" onClick={() => setMobileOpen(false)} aria-label="Close menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="1.5">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F5F1EB" strokeWidth="1.5">
             <line x1="4" y1="4" x2="20" y2="20" />
             <line x1="20" y1="4" x2="4" y2="20" />
           </svg>
@@ -113,13 +120,6 @@ const Navbar = () => {
           <Link to="/order" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Order</Link>
         </nav>
 
-        <div className="mobile-menu-info">
-          <p className="mobile-info-text">
-            7100 BISCAYNE BLVD, MIAMI, FL 33138<br />
-            INFO@FRANKIESMEXICAN.COM<br />
-            FOLLOW US @FRANKIESMEXICAN
-          </p>
-        </div>
       </div>
     </>
   );

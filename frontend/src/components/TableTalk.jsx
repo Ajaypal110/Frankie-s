@@ -69,12 +69,14 @@ const TableTalk = ({ items }) => {
         </div>
 
         {/* Testimonials Columns */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '40px',
-          flex: 1
-        }}>
+        <div 
+          className="testimonial-columns"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '40px',
+            flex: 1
+          }}>
           {testimonials.map((item, idx) => {
             const quote = typeof item.content.rendered === 'string'
               ? item.content.rendered.replace(/<[^>]*>/g, '')

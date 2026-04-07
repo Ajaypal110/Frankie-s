@@ -9,13 +9,15 @@ const ImageGrid = () => {
       padding: '0',
       width: '100%',
     }}>
-      <div style={{
-        display: 'flex',
-        width: '100%',
-        gap: '0',
-        padding: '0',
-        boxSizing: 'border-box'
-      }}>
+      <div 
+        className="image-grid-container"
+        style={{
+          display: 'flex',
+          width: '100%',
+          gap: '0',
+          padding: '0',
+          boxSizing: 'border-box'
+        }}>
         {/* Left Column */}
         <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '0' }}>
           <img 

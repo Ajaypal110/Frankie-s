@@ -37,7 +37,9 @@ const SecretSauce = ({ data }) => {
       <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '40px' }}>
         
         {/* Top Row */}
-        <div className="fade-in" style={{ display: 'flex', justifyContent: 'space-between', gap: '40px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
+        <div 
+          className="secret-sauce-row fade-in"
+          style={{ display: 'flex', justifyContent: 'space-between', gap: '40px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
           <h2 style={{
             flex: '1 1 300px',
             fontFamily: '"Playfair Display", Georgia, serif',
@@ -65,13 +67,14 @@ const SecretSauce = ({ data }) => {
         <div className="fade-in" style={{ 
           display: 'flex', 
           justifyContent: 'center', 
-          gap: 'clamp(120px, 20vw, 250px)',
-          padding: '40px 0',
+          gap: 'clamp(20px, 8vw, 250px)',
+          flexWrap: 'wrap',
+          padding: '20px 0',
           width: '100%',
         }}>
           {[...Array(4)].map((_, i) => (
             <div key={i} style={{
-              transform: `translateY(${i % 2 === 0 ? '30px' : '-30px'})`
+              transform: `translateY(${i % 2 === 0 ? '20px' : '-20px'})`
             }}>
               <img 
                 className={i % 2 === 0 ? "skull-animate" : "skull-animate-reverse"}
@@ -79,7 +82,7 @@ const SecretSauce = ({ data }) => {
                 alt="Artistic Skull Logo" 
                 style={{
                   width: 'auto',
-                  height: 'clamp(140px, 20vw, 220px)',
+                  height: 'clamp(100px, 18vw, 220px)',
                   objectFit: 'contain'
                 }}
               />
@@ -88,7 +91,9 @@ const SecretSauce = ({ data }) => {
         </div>
 
         {/* Bottom Row */}
-        <div className="fade-in" style={{ display: 'flex', justifyContent: 'space-between', gap: '40px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
+        <div 
+          className="secret-sauce-row fade-in"
+          style={{ display: 'flex', justifyContent: 'space-between', gap: '40px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
           <h2 style={{
             flex: '1 1 300px',
             fontFamily: '"Playfair Display", Georgia, serif',
