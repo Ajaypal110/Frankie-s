@@ -9,12 +9,6 @@ const AboutPage = ({ data }) => {
   const story = data?.acf?.about_story ||
     "Frankie's has become a standard for quality and consistency for locals and visitors alike. Our atmosphere evolves throughout the day, from family, friends and colleagues sharing a great meal in the afternoon, to a bustling happy hour where you can enjoy our signature margaritas and top quality oysters for half the price, all the way through dinner to late night.";
 
-  const chefHeading = data?.acf?.chef_heading || "CHEF NUNO GRULLON";
-  const chefSubheading = data?.acf?.chef_subheading || "PASSIONATE CREATIVITY";
-
-  const chefBio = data?.acf?.chef_bio ||
-    "From our hand-pressed tortillas of heirloom corn from Oaxaca, to our award winning Birria made with short-rib, oxtail and beef cheek slow-braised overnight with our selection of Mexican chilis. It only begins there, this diverse menu has many fan favorites all made from scratch. From the notorious steak burrito to our famous loaded nachos layered with house made cheese sauce. Always leave room for dessert, light airy churros dipped in silky chocolate sauce, creamy caramel flan and a tres leches like you've never had before. Every dish we serve is to showcase our passion for food.";
-
   useEffect(() => {
     window.scrollTo(0, 0);
     const observer = new IntersectionObserver(
@@ -36,8 +30,17 @@ const AboutPage = ({ data }) => {
   }, []);
 
   return (
-    <div ref={sectionRef} style={{ background: '#fff', overflowX: 'hidden' }}>
+    <div ref={sectionRef} style={{ background: '#fff' }}>
       <style>{`
+        /* PHASE 1: HERO STICKY */
+        .sticky-hero-layer {
+          position: -webkit-sticky !important; /* For Safari */
+          position: sticky !important;
+          top: 0 !important;
+          z-index: 1 !important;
+          width: 100%;
+        }
+
         @media (max-width: 1024px) {
           .about-editorial-grid {
             grid-template-columns: 1fr !important;
@@ -45,10 +48,6 @@ const AboutPage = ({ data }) => {
           }
           .about-hero-section {
             height: 50vh !important;
-          }
-          .sticky-col {
-            position: relative !important;
-            top: 0 !important;
           }
           .editorial-image-container {
             height: 400px !important;
@@ -59,8 +58,10 @@ const AboutPage = ({ data }) => {
         }
       `}</style>
 
-      {/* Intro Section */}
+      {/* Intro Section - Relative to cover sticking hero */}
       <section className="intro-section" style={{ 
+        position: 'relative',
+        zIndex: 10, // Must be higher than sticky layer
         background: '#ffffff', 
         textAlign: 'left',
         padding: '180px 40px 100px 40px',
@@ -96,21 +97,21 @@ const AboutPage = ({ data }) => {
         </div>
       </section>
 
-      {/* Hero Banner */}
-      <section className="about-hero-section hero-section" style={{ height: '80vh', zIndex: 0 }}>
+      {/* Hero Banner - THE STICKY ELEMENT */}
+      <section className="about-hero-section sticky-hero-layer" style={{ height: '80vh' }}>
         <img
           src="https://images.unsplash.com/photo-1504544750208-dc0358e63f7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
           alt="Restaurant interior"
           className="hero-bg"
-          style={{ objectFit: 'cover' }}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
         />
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)' }} />
       </section>
 
-      {/* Chef Section */}
+      {/* Sections following the Hero - Relative with Higher Z-index to slide OVER */}
       <section style={{ 
         position: 'relative',
-        zIndex: 10,
+        zIndex: 10, // Slide OVER sticky hero
         background: '#ffffff', 
         padding: '120px 40px 80px 40px', 
         width: '100%' 
@@ -123,9 +124,8 @@ const AboutPage = ({ data }) => {
           gap: '60px',
           alignItems: 'flex-start'
         }}>
-          
-          {/* Left: Chef Heading */}
-          <div className="fade-in sticky-col">
+          {/* Chef Section Content */}
+          <div className="fade-in">
             <h2 style={{
               fontFamily: '"Playfair Display", serif',
               fontSize: 'clamp(28px, 4vw, 36px)',
@@ -146,8 +146,7 @@ const AboutPage = ({ data }) => {
             }}>PASSIONATE CREATIVITY<br />FROM THE BRONX TO MIAMI</p>
           </div>
 
-          {/* Center: Chef Portrait */}
-          <div className="fade-in editorial-image-container sticky-col" style={{ position: 'relative', overflow: 'hidden', height: '600px' }}>
+          <div className="fade-in editorial-image-container" style={{ position: 'relative', overflow: 'hidden', height: '600px' }}>
             <img 
               src="/chef-about.png" 
               alt="Chef Nuno Grullon" 
@@ -155,7 +154,6 @@ const AboutPage = ({ data }) => {
             />
           </div>
 
-          {/* Right: Narrative Bio */}
           <div className="fade-in" style={{ textAlign: 'left' }}>
             <p style={{
               fontFamily: '"Courier Prime", monospace',
@@ -167,11 +165,10 @@ const AboutPage = ({ data }) => {
             }} dangerouslySetInnerHTML={{ __html: "Chef Nuno Grullon, A New York native started working in restaurants at the early age of sixteen. Over the years while continuing expand his culinary knowledge and skill, started receiving recognition and accolades, appearing on Bravo's television show \"Best New Restaurant\" produced by Gordon Ramsay and has also toured central America with the culinary magazine \"Buen Provecho\". In 2019 Chef Nuno Grullon decided to put his skill and vision into his first business, on a unique corner of Biscayne Boulevard and NE 66th Street. Uptown 66 would become a welcome addition to Miami's Upper east Side MiMo District. Uptown 66 is an exploration of authentic Mexican street food through the lens of Chef Nuno.<br/><br/>Receiving national accreditation from Good Morning America with their birria taco winning \"Best Taco in America\". Despite the success of his first venture, Grullon had a vision for a much broader impact in Miami culinary and hospitality. Grullon set forward to bring a concept that would challenge him to push the boundaries of his skillset and creativity and showcase his culinary passion in a way Miami has yet to see fully. Grand Central would become the outlet for that passion. Opting for pure quality and perfect execution over innovation, Grullon would present American classics with subtle French influence raising the bar for what should be expected from the young restaurant group." }}>
             </p>
           </div>
-
         </div>
       </section>
 
-      {/* Passion for Food Section */}
+      {/* Final Passion Section */}
       <section style={{ 
         position: 'relative',
         zIndex: 10,
@@ -187,8 +184,6 @@ const AboutPage = ({ data }) => {
           gap: '60px',
           alignItems: 'flex-start'
         }}>
-          
-          {/* Left: Illustration Column */}
           <div style={{ textAlign: 'left', paddingTop: '40px' }} className="fade-in">
             <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="0.5" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="7.5" cy="5.5" r="0.4" fill="#1a1a1a" />
@@ -201,8 +196,6 @@ const AboutPage = ({ data }) => {
               <path d="M15 4.5h2v3h-2z" />
             </svg>
           </div>
-
-          {/* Center: Story Continuation */}
           <div style={{ textAlign: 'left' }} className="fade-in">
             <p style={{
               fontFamily: '"Courier Prime", monospace',
@@ -212,35 +205,28 @@ const AboutPage = ({ data }) => {
               letterSpacing: '0.02em',
               color: '#333'
             }}>
-              From our hand-pressed tortillas of heirloom corn from Oaxaca, to our award winning Birria made with short-rib, oxtail and beef cheek slow-braised overnight with our selection of Mexican chilis. It only begins there, this diverse menu has many fan favorites all made from scratch.
-              <br /><br />
-              From the notorious steak burrito to our famous loaded nachos layered with house made cheese sauce. Always leave room for dessert, light airy churros dipped in silky chocolate sauce, creamy caramel flan and a tres leches like you've never had before. Every dish we serve is to showcase our passion for food.
+              Every dish we serve is to showcase our passion for food. Our hand-pressed tortillas of heirloom corn from Oaxaca, award winning Birria, and silky chocolate churros.
             </p>
           </div>
-
-          {/* Right: Food Lifestyle Image */}
           <div className="fade-in editorial-image-container" style={{ position: 'relative', overflow: 'hidden', height: '650px' }}>
             <img 
               src="/food-passion.png" 
-              alt="Frankie's culinary spread" 
+              alt="Frankie's food" 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
             />
           </div>
-
         </div>
       </section>
 
-      {/* Finishing Lifestyle Banner */}
-      <section className="about-hero-section hero-section" style={{ height: '70vh', zIndex: 0 }}>
+      {/* Stretching Lifestyle Banner (Static) */}
+      <section style={{ position: 'relative', zIndex: 10, height: '70vh', background: '#fff' }}>
         <img 
           src="/about-lifestyle.png" 
-          alt="Outdoor dining at Frankie's" 
-          className="hero-bg"
-          style={{ objectFit: 'cover' }} 
+          alt="Outdoor dining" 
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
         />
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.1)' }} />
       </section>
-
+      
       <div style={{ position: 'relative', zIndex: 10, height: '20px', background: '#ffffff' }} />
     </div>
   );
