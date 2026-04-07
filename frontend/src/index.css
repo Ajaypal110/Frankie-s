@@ -87,6 +87,11 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   z-index: 0;
 }
+@media (max-width: 768px) {
+  .hero-section {
+    height: 60vh;
+  }
+}
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -590,10 +595,10 @@ h1, h2, h3, h4, h5, h6 {
     gap: 20px !important;
   }
 
-  /* Image Grid Stacking */
-  .image-grid-container {
+  /* Image Grid Stacking - Removed to allow 2-column layout */
+  /*.image-grid-container {
     flex-direction: column !important;
-  }
+  }*/
 }/* ========== STICKY ELEMENTS ========== */
 @media (min-width: 1024px) {
   .sticky-col {

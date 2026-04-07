@@ -5,7 +5,6 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const isHome = location.pathname === '/';
   const isAbout = location.pathname === '/about';
   const isPress = location.pathname === '/press';
   const isMenu = location.pathname === '/agourahillsmenu';
@@ -41,7 +40,7 @@ const Navbar = () => {
           transition: 'all 0.5s ease',
         }}
       >
-        <nav style={{
+        <nav className="navbar-container" style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -49,6 +48,7 @@ const Navbar = () => {
           position: 'relative',
           height: '100%',
           width: '100%',
+          boxSizing: 'border-box'
         }}>
           {/* Hamburger (Left Corner) */}
           <div style={{ display: 'flex', justifyContent: 'flex-start', flex: 1 }}>
@@ -67,7 +67,7 @@ const Navbar = () => {
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
             >
-              <svg width="42" height="28" viewBox="0 0 42 28" fill={textColor} style={{ 
+              <svg width="clamp(32, 5vw, 42)" height="28" viewBox="0 0 42 28" fill={textColor} style={{ 
                 transition: 'fill 0.5s ease',
                 filter: 'drop-shadow(0px 1px 2px rgba(0,0,0,0.3))'
               }}>
@@ -92,10 +92,11 @@ const Navbar = () => {
               src="/logo.png" 
               alt="Frankie's Logo" 
               style={{
-                height: 'clamp(40px, 10vw, 65px)',
+                height: 'clamp(40px, 12vw, 65px)',
                 width: 'auto',
                 filter: isDarkTheme ? 'none' : 'brightness(0) invert(1)',
                 transition: 'filter 0.5s ease',
+                maxWidth: '180px'
               }} 
             />
           </Link>
@@ -104,6 +105,14 @@ const Navbar = () => {
           <div style={{ flex: 1 }}></div>
         </nav>
       </header>
+
+      <style>{`
+        @media (max-width: 600px) {
+          .navbar-container {
+            padding: 16px 20px !important;
+          }
+        }
+      `}</style>
 
       {/* Mobile Menu Overlay */}
       <div className={`mobile-menu-overlay ${mobileOpen ? 'open' : ''}`}>
@@ -121,7 +130,6 @@ const Navbar = () => {
           <Link to="/press" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Press</Link>
           <a href="https://frankiesbreakfastburritos.toast.site/" target="_blank" rel="noopener noreferrer" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Order</a>
         </nav>
-
       </div>
     </>
   );

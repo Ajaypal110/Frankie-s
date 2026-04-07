@@ -15,9 +15,9 @@ const LocationsPage = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <div>
+    <div style={{ overflowX: 'hidden' }}>
       {/* Reduced Height Hero Section */}
-      <section style={{
+      <section className="locations-hero" style={{
         position: 'relative', 
         height: '35vh',
         display: 'flex',
@@ -29,16 +29,26 @@ const LocationsPage = () => {
         <h1 style={{
           color: '#F5F1EB', 
           fontFamily: '"Playfair Display", serif',
-          fontSize: 'clamp(32px, 5vw, 48px)',
+          fontSize: 'clamp(32px, 8vw, 48px)',
           fontWeight: 400,
           letterSpacing: '0.15em', 
           textTransform: 'uppercase',
-          marginTop: '40px'
+          marginTop: '60px',
+          textAlign: 'center',
+          padding: '0 20px'
         }}>Locations</h1>
       </section>
 
+      <style>{`
+        @media (max-width: 768px) {
+          .locations-hero {
+            height: 25vh !important;
+          }
+        }
+      `}</style>
+
       {/* Location Card Grid (Scaled Down) */}
-      <section className="section-padding" style={{ background: '#F5F1EB' }}>
+      <section className="section-padding" style={{ background: '#F5F1EB', padding: 'clamp(40px, 10vw, 80px) 20px' }}>
         <div style={{
           maxWidth: '600px', margin: '0 auto',
           display: 'grid', gridTemplateColumns: '1fr',
@@ -55,7 +65,7 @@ const LocationsPage = () => {
                 }} />
               </div>
               <h3 style={{
-                fontFamily: '"Playfair Display", serif', fontSize: '28px',
+                fontFamily: '"Playfair Display", serif', fontSize: 'clamp(24px, 5vw, 28px)',
                 fontWeight: 400, letterSpacing: '0.12em', textTransform: 'uppercase',
                 marginBottom: '8px',
               }}>{loc.name}</h3>

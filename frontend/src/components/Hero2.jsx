@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const Hero2 = () => {
   return (
-    <section style={{
+    <section className="hero-2-section" style={{
       position: 'sticky',
       top: 0,
       width: '100%',
@@ -13,6 +13,13 @@ const Hero2 = () => {
       overflow: 'hidden',
       zIndex: 20,
     }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .hero-2-section {
+            height: 30vh !important;
+          }
+        }
+      `}</style>
       <img
         style={{
           position: 'absolute',

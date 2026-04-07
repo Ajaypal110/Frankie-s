@@ -35,25 +35,44 @@ const PressPage = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <div>
+    <div style={{ background: '#fff', overflowX: 'hidden' }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .press-header {
+            padding-top: 120px !important;
+            padding-bottom: 20px !important;
+          }
+          .press-grid-section {
+            padding: 0 20px 60px 20px !important;
+          }
+          .press-grid {
+            grid-template-columns: 1fr !important;
+            gap: 40px !important;
+          }
+          .press-image-container {
+            height: 240px !important;
+          }
+        }
+      `}</style>
+
       {/* Header */}
-      <section style={{
+      <section className="press-header" style={{
         background: '#ffffff', color: '#1a1a1a', textAlign: 'center',
         paddingTop: '160px', paddingBottom: '40px', paddingLeft: '24px', paddingRight: '24px',
       }}>
         <h1 style={{
-          fontFamily: '"Playfair Display", serif', fontSize: 'clamp(20px, 3vw, 32px)',
+          fontFamily: '"Playfair Display", serif', fontSize: 'clamp(24px, 5vw, 32px)',
           fontWeight: 400, letterSpacing: '0.15em', textTransform: 'uppercase',
         }}>Press</h1>
       </section>
 
       {/* Press Grid */}
-      <section style={{ background: '#ffffff', padding: '0 40px 100px 40px' }}>
-        <div style={{ 
+      <section className="press-grid-section" style={{ background: '#ffffff', padding: '0 40px 100px 40px' }}>
+        <div className="press-grid" style={{ 
           maxWidth: '1200px', 
           margin: '0 auto',
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(450px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))',
           gap: '60px 40px'
         }}>
           {pressItems.map((item, idx) => (
@@ -61,7 +80,7 @@ const PressPage = () => {
               display: 'flex', flexDirection: 'column', textDecoration: 'none', color: 'inherit',
               cursor: 'pointer'
             }}>
-              <div style={{ 
+              <div className="press-image-container" style={{ 
                 width: '100%', 
                 height: '320px', 
                 borderRadius: '24px', 
@@ -81,19 +100,19 @@ const PressPage = () => {
               </div>
               
               <p style={{
-                fontFamily: '"Courier Prime", monospace', fontSize: '18px',
+                fontFamily: '"Courier Prime", monospace', fontSize: 'clamp(14px, 2vw, 18px)',
                 fontWeight: 700, textTransform: 'uppercase',
-                color: '#000', marginBottom: '16px',
+                color: '#000', marginBottom: '12px',
               }}>{item.source}</p>
               
               <h3 style={{
-                fontFamily: '"Courier Prime", monospace', fontSize: '16px',
+                fontFamily: '"Courier Prime", monospace', fontSize: 'clamp(13px, 1.8vw, 16px)',
                 fontWeight: 700, lineHeight: 1.6,
                 color: '#1a1a1a', marginBottom: '12px',
               }}>{item.headline}</h3>
               
               <p style={{
-                fontFamily: '"Times New Roman", Times, serif', fontSize: '16px',
+                fontFamily: '"Times New Roman", Times, serif', fontSize: '15px',
                 fontWeight: 400, lineHeight: 1.6,
                 color: '#444',
               }}>{item.description}</p>

@@ -44,7 +44,22 @@ const TableTalk = ({ items }) => {
       position: 'relative',
       zIndex: 10
     }}>
-      <div style={{
+      <style>{`
+        @media (max-width: 768px) {
+          .talk-section {
+            padding: 60px 20px !important;
+          }
+          .talk-container {
+            flex-direction: column !important;
+            gap: 20px !important;
+          }
+          .testimonial-columns {
+            grid-template-columns: 1fr !important;
+            gap: 30px !important;
+          }
+        }
+      `}</style>
+      <div className="talk-container" style={{
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'flex-start',

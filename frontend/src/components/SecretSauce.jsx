@@ -26,15 +26,37 @@ const SecretSauce = ({ data }) => {
   }, []);
 
   return (
-    <section ref={sectionRef} style={{
+    <section ref={sectionRef} className="secret-sauce-section" style={{
       position: 'relative',
       zIndex: 10,
       backgroundColor: '#ffffff',
       color: '#1a1a1a',
-      padding: '60px 40px',
+      padding: '120px 40px',
       overflow: 'hidden'
     }}>
-      <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '40px' }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .secret-sauce-section {
+            padding: 60px 20px !important;
+          }
+          .secret-sauce-row {
+            flex-direction: column !important;
+            gap: 20px !important;
+            align-items: flex-start !important;
+          }
+          .secret-sauce-row h2, .secret-sauce-row p {
+            flex: none !important; /* Fix: prevents flex-basis being used as height */
+            width: 100% !important;
+          }
+          .skull-container {
+            gap: 40px !important;
+          }
+          .skull-animate, .skull-animate-reverse {
+            height: 120px !important;
+          }
+        }
+      `}</style>
+      <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '80px' }}>
         
         {/* Top Row */}
         <div 
@@ -64,7 +86,7 @@ const SecretSauce = ({ data }) => {
         </div>
 
         {/* Skulls Row */}
-        <div className="fade-in" style={{ 
+        <div className="fade-in skull-container" style={{ 
           display: 'flex', 
           justifyContent: 'center', 
           gap: 'clamp(20px, 8vw, 250px)',

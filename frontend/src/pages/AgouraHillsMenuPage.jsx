@@ -103,7 +103,7 @@ const AgouraHillsMenuPage = () => {
   const renderGrid = (items) => (
     <div style={{ 
       display: 'grid', 
-      gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', 
+      gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
       gap: '40px' 
     }}>
       {items.map(item => (
@@ -119,13 +119,12 @@ const AgouraHillsMenuPage = () => {
             textDecoration: 'none',
             color: 'inherit',
             cursor: 'pointer',
-            position: 'relative',
-            group: 'true'
+            position: 'relative'
           }}
         >
           <div style={{
             width: '100%',
-            height: '320px',
+            aspectRatio: '1/1',
             borderRadius: '16px',
             overflow: 'hidden',
             marginBottom: '20px',
@@ -194,19 +193,18 @@ const AgouraHillsMenuPage = () => {
             color: '#666',
             lineHeight: '1.6'
           }}>{item.description}</p>
-
-          <style>{`
-            .menu-card:hover .order-overlay {
-              opacity: 1;
-            }
-          `}</style>
         </a>
       ))}
+      <style>{`
+        .menu-card:hover .order-overlay {
+          opacity: 1;
+        }
+      `}</style>
     </div>
   );
 
   return (
-    <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: '#fff', minHeight: '100vh', overflowX: 'hidden' }}>
       {/* Category Nav & Search Header */}
       <div style={{ 
         paddingTop: '120px', 
@@ -217,18 +215,25 @@ const AgouraHillsMenuPage = () => {
         zIndex: 40,
         width: '100%'
       }}>
-        <div style={{ 
+        <div className="menu-header-container" style={{ 
           maxWidth: '1400px', 
           margin: '0 auto', 
           display: 'flex', 
           justifyContent: 'space-between', 
           alignItems: 'center',
           padding: '0 40px',
-          flexWrap: 'wrap',
           gap: '20px'
         }}>
           {/* Categories */}
-          <nav style={{ display: 'flex', gap: '30px', overflowX: 'auto', paddingBottom: '15px', flex: 1 }}>
+          <nav style={{ 
+            display: 'flex', 
+            gap: '30px', 
+            overflowX: 'auto', 
+            paddingBottom: '15px', 
+            flex: 1,
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
+          }} className="category-nav">
             {CATEGORIES.map(cat => (
               <button
                 key={cat}
@@ -256,7 +261,7 @@ const AgouraHillsMenuPage = () => {
           </nav>
 
           {/* Search */}
-          <div style={{ position: 'relative', marginBottom: '15px' }}>
+          <div className="search-container" style={{ position: 'relative', marginBottom: '15px' }}>
             <input 
               type="text" 
               placeholder="Search dishes..." 
@@ -270,7 +275,8 @@ const AgouraHillsMenuPage = () => {
                 fontSize: '14px',
                 width: 'clamp(200px, 20vw, 300px)',
                 outline: 'none',
-                backgroundColor: '#f9f9f9'
+                backgroundColor: '#f9f9f9',
+                boxSizing: 'border-box'
               }}
             />
             <svg style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)' }} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2">
@@ -280,8 +286,32 @@ const AgouraHillsMenuPage = () => {
         </div>
       </div>
 
+      <style>{`
+        @media (max-width: 768px) {
+          .menu-header-container {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            padding: 0 20px !important;
+            gap: 10px !important;
+          }
+          .category-nav {
+            width: 100%;
+            padding-bottom: 5px !important;
+          }
+          .search-container {
+            width: 100%;
+          }
+          .search-container input {
+            width: 100% !important;
+          }
+          .category-nav::-webkit-scrollbar {
+            display: none;
+          }
+        }
+      `}</style>
+
       {/* Hero Content Section */}
-      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '60px 40px' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '60px 40px' }} className="menu-grid-container">
         {CATEGORIES.filter(c => c !== "All").map(category => {
           if (activeCategory !== "All" && activeCategory !== category) return null;
 
@@ -297,7 +327,7 @@ const AgouraHillsMenuPage = () => {
             <div key={category} style={{ marginBottom: '80px' }}>
               <h2 style={{ 
                 fontFamily: '"Montserrat", sans-serif', 
-                fontSize: '28px', 
+                fontSize: 'clamp(22px, 4vw, 28px)', 
                 fontWeight: 700, 
                 marginBottom: '15px',
                 textTransform: 'uppercase',
@@ -327,6 +357,14 @@ const AgouraHillsMenuPage = () => {
           </div>
         )}
       </div>
+
+      <style>{`
+        @media (max-width: 600px) {
+          .menu-grid-container {
+            padding: 40px 20px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };
