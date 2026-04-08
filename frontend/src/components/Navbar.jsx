@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -9,12 +10,21 @@ const Navbar = () => {
   const isPress = location.pathname === '/press';
   const isMenu = location.pathname === '/agourahillsmenu';
 
+  const [settings, setSettings] = useState(null);
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     handleScroll();
+    
+    // Fetch global settings
+    fetch(`${API_BASE_URL}/frankies/v1/global?t=${new Date().getTime()}`)
+      .then(res => res.json())
+      .then(setSettings)
+      .catch(err => console.error("Could not load global settings:", err));
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -89,7 +99,7 @@ const Navbar = () => {
             alignItems: 'center',
           }}>
             <img 
-              src="/logo.png" 
+              src={settings?.navbar_logo_url || "/logo.png"} 
               alt="Frankie's Logo" 
               style={{
                 height: 'clamp(40px, 12vw, 65px)',
@@ -128,7 +138,7 @@ const Navbar = () => {
           <Link to="/locations" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Locations</Link>
           <Link to="/agourahillsmenu" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Menus</Link>
           <Link to="/press" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Press</Link>
-          <a href="https://frankiesbreakfastburritos.toast.site/" target="_blank" rel="noopener noreferrer" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Order</a>
+          <a href={settings?.order_online_url || "https://frankiesbreakfastburritos.toast.site/"} target="_blank" rel="noopener noreferrer" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Order</a>
         </nav>
       </div>
     </>

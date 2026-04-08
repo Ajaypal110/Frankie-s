@@ -1,14 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
 
 const Footer = () => {
+  const [settings, setSettings] = useState(null);
+
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/frankies/v1/global?t=${new Date().getTime()}`)
+      .then(res => res.json())
+      .then(setSettings)
+      .catch(err => console.error("Could not load global settings for footer:", err));
+  }, []);
+
+  const formatAddress = (text) => {
+    if (!text) return null;
+    return text.split('\n').map((line, i) => (
+      <React.Fragment key={i}>
+        {line}
+        <br />
+      </React.Fragment>
+    ));
+  };
   return (
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-top">
           <Link to="/">
             <img 
-              src="/logo.png" 
+              src={settings?.navbar_logo_url || "/logo.png"} 
               alt="Frankie's Logo" 
               style={{
                 height: '80px',
@@ -27,8 +46,9 @@ const Footer = () => {
             
             <div className="footer-location-block">
               <p className="footer-address">
-                7100 BISCAYNE BLVD,<br />
-                MIAMI, FL 33138
+                {settings ? formatAddress(settings.footer_address) : (
+                  <>7100 BISCAYNE BLVD,<br />MIAMI, FL 33138</>
+                )}
               </p>
             </div>
 
@@ -50,17 +70,18 @@ const Footer = () => {
           <div className="footer-column">
             <h4 className="footer-heading">SAY HOLA</h4>
             <nav className="footer-nav">
-              <span className="footer-link">INFO@FRANKIESMEXICAN.COM</span>
-              <a href="https://instagram.com" className="footer-link" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
-              <a href="#" className="footer-link">ORDER ONLINE</a>
-              <a href="#" className="footer-link">RESERVATIONS</a>
+              <span className="footer-link">{settings?.footer_email || "INFO@FRANKIESMEXICAN.COM"}</span>
+              <a href={settings?.instagram_url || "https://instagram.com"} className="footer-link" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+              {settings?.facebook_url && <a href={settings.facebook_url} className="footer-link" target="_blank" rel="noopener noreferrer">FACEBOOK</a>}
+              <a href={settings?.order_online_url || "#"} className="footer-link" target="_blank" rel="noopener noreferrer">ORDER ONLINE</a>
+              <a href={settings?.reservations_url || "#"} className="footer-link" target="_blank" rel="noopener noreferrer">RESERVATIONS</a>
             </nav>
           </div>
         </div>
 
         <div className="footer-bottom">
           <p className="footer-copy">
-            &copy; {new Date().getFullYear()} FRANKIE'S BURRITO. ALL RIGHTS RESERVED.
+            &copy; {new Date().getFullYear()} {settings?.copyright_text || "FRANKIE'S BURRITO. ALL RIGHTS RESERVED."}
           </p>
         </div>
       </div>

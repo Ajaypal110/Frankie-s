@@ -1,6 +1,11 @@
 import React from 'react';
 
-const ImageGrid = () => {
+const ImageGrid = ({ data }) => {
+  const img1 = data?.grid_image_1_url || "/grid-cocktail.png";
+  const img2 = data?.grid_image_2_url || "/grid-calamari.png";
+  const img3 = data?.grid_image_3_url || "/grid-oysters.png";
+  const img4 = data?.grid_image_4_url || "/grid-churros.png";
+
   return (
     <section style={{
       position: 'relative',
@@ -42,13 +47,13 @@ const ImageGrid = () => {
         <div className="image-col" style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <img 
             className="image-item img-h-small"
-            src="/grid-cocktail.png" 
+            src={img1} 
             alt="Signature Cocktail" 
             style={{ width: '100%', objectFit: 'cover', display: 'block', background: '#eee' }}
           />
           <img 
             className="image-item img-h-small"
-            src="/grid-calamari.png" 
+            src={img2} 
             alt="Fried Calamari" 
             style={{ width: '100%', objectFit: 'cover', display: 'block', background: '#eee' }}
           />
@@ -58,13 +63,13 @@ const ImageGrid = () => {
         <div className="image-col" style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <img 
             className="image-item img-h-med"
-            src="/grid-oysters.png" 
+            src={img3} 
             alt="Oyster Platter" 
             style={{ width: '100%', objectFit: 'cover', display: 'block', background: '#eee' }}
           />
           <img 
             className="image-item img-h-vsmall"
-            src="/grid-churros.png" 
+            src={img4} 
             alt="Churros with Chocolate" 
             style={{ width: '100%', objectFit: 'cover', display: 'block', background: '#eee' }}
           />

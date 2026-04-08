@@ -64,11 +64,24 @@ function uptown66_register_cpts() {
         'supports'           => array( 'title', 'editor', 'thumbnail', 'custom-fields' ),
     );
     register_post_type( 'location', $location_args );
+
+    // Press Items
+    $press_labels = array(
+        'name'                  => 'Press Items',
+        'singular_name'         => 'Press Item',
+    );
+    $press_args = array(
+        'labels'             => $press_labels,
+        'public'             => true,
+        'show_in_rest'       => true,
+        'supports'           => array( 'title', 'editor', 'thumbnail', 'custom-fields' ),
+    );
+    register_post_type( 'press_item', $press_args );
 }
 
 // Ensure custom fields are exposed in REST API
 add_action('rest_api_init', function() {
-    register_rest_field( array('menu_item', 'location'), 'meta', array(
+    register_rest_field( array('menu_item', 'location', 'press_item'), 'meta', array(
         'get_callback' => function( $object ) {
             return get_post_meta( $object['id'] );
         },

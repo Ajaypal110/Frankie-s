@@ -3,10 +3,11 @@ import React, { useEffect, useRef } from 'react';
 const SecretSauce = ({ data }) => {
   const sectionRef = useRef(null);
   
-  const bottomBody = data?.acf?.sauce_body ||
-    "WITH THE CELEBRATION OF OUR CULINARY PASSION, FRANKIE'S FEATURES HAND-PRESSED TORTILLAS MADE FROM HEIRLOOM CORN SOURCED FROM OAXACA AND SIGNATURE BARBACOA CRAFTED FROM SHORT-RIB, OXTAIL, AND BEEF CHEEK, ALL SLOW-BRAISED WITH MEXICAN CHILIS TO DEVELOP RICH, AUTHENTIC FLAVORS.";
+  const bottomBody = data?.secret_sauce_body || "WITH THE CELEBRATION OF OUR CULINARY PASSION, FRANKIE'S FEATURES HAND-PRESSED TORTILLAS MADE FROM HEIRLOOM CORN SOURCED FROM OAXACA AND SIGNATURE BARBACOA CRAFTED FROM SHORT-RIB, OXTAIL, AND BEEF CHEEK, ALL SLOW-BRAISED WITH MEXICAN CHILIS TO DEVELOP RICH, AUTHENTIC FLAVORS.";
 
-  const topBody = "FRANKIE'S IS AN EXPLORATION OF AUTHENTIC MEXICAN STREET FOOD THROUGH THE LENS OF CHEF NUNO. SOURCING FRESHEST LOCAL PRODUCE AND HIGHEST QUALITY MEATS AND SEAFOOD.";
+  const topBody = data?.secret_sauce_intro || "FRANKIE'S IS AN EXPLORATION OF AUTHENTIC MEXICAN STREET FOOD THROUGH THE LENS OF CHEF NUNO. SOURCING FRESHEST LOCAL PRODUCE AND HIGHEST QUALITY MEATS AND SEAFOOD.";
+
+  const heading = data?.secret_sauce_heading || "THE SECRET SAUCE OF FRANKIE'S";
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -70,7 +71,7 @@ const SecretSauce = ({ data }) => {
             letterSpacing: '0.1em',
             textTransform: 'uppercase'
           }}>
-            FRANKIE'S
+            {data?.secret_sauce_title || "FRANKIE'S"}
           </h2>
           <p style={{
             flex: '2 1 500px',
@@ -124,7 +125,7 @@ const SecretSauce = ({ data }) => {
             letterSpacing: '0.1em',
             textTransform: 'uppercase'
           }}>
-            THE SECRET SAUCE OF FRANKIE'S
+            {heading}
           </h2>
           <p style={{
             flex: '2 1 500px',

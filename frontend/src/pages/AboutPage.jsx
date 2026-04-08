@@ -1,16 +1,19 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { API_BASE_URL } from '../config';
 
-const AboutPage = ({ data }) => {
+const AboutPage = () => {
   const sectionRef = useRef(null);
-
-  const intro = data?.acf?.about_intro ||
-    "Inspired by our creators, Frankie's is an exploration of authentic Mexican street food. Sourcing the freshest local produce and highest quality meats and seafood.";
-
-  const story = data?.acf?.about_story ||
-    "Frankie's has become a standard for quality and consistency for locals and visitors alike. Our atmosphere evolves throughout the day, from family, friends and colleagues sharing a great meal in the afternoon, to a bustling happy hour where you can enjoy our signature margaritas and top quality oysters for half the price, all the way through dinner to late night.";
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    
+    // Fetch dynamic about page data (appended timestamp to prevent aggressive browser caching)
+    fetch(`${API_BASE_URL}/frankies/v1/about?t=${new Date().getTime()}`)
+      .then(res => res.json())
+      .then(setData)
+      .catch(err => console.error("Failed to load About page content:", err));
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
@@ -28,6 +31,23 @@ const AboutPage = ({ data }) => {
     }
     return () => observer.disconnect();
   }, []);
+
+  // Set up fallbacks gracefully matching the original static content
+  const introTitle = data?.intro_title || "GET TO KNOW US";
+  const intro = data?.intro_text || "Inspired by our creators, Frankie's is an exploration of authentic Mexican street food. Sourcing the freshest local produce and highest quality meats and seafood.";
+  const story = data?.story_text || "Frankie's has become a standard for quality and consistency for locals and visitors alike. Our atmosphere evolves throughout the day, from family, friends and colleagues sharing a great meal in the afternoon, to a bustling happy hour where you can enjoy our signature margaritas and top quality oysters for half the price, all the way through dinner to late night.";
+  
+  const heroImage = data?.hero_image_url || "https://images.unsplash.com/photo-1504544750208-dc0358e63f7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80";
+  
+  const chefTitle = data?.chef_title || "CHEF NUNO GRULLON:";
+  const chefSubtitle = data?.chef_subtitle || "PASSIONATE CREATIVITY<br />FROM THE BRONX TO MIAMI";
+  const chefImageUrl = data?.chef_image_url || "/chef-about.png";
+  const chefBio = data?.chef_bio || "Chef Nuno Grullon, A New York native started working in restaurants at the early age of sixteen. Over the years while continuing expand his culinary knowledge and skill, started receiving recognition and accolades, appearing on Bravo's television show \"Best New Restaurant\" produced by Gordon Ramsay and has also toured central America with the culinary magazine \"Buen Provecho\". In 2019 Chef Nuno Grullon decided to put his skill and vision into his first business, on a unique corner of Biscayne Boulevard and NE 66th Street. Uptown 66 would become a welcome addition to Miami's Upper east Side MiMo District. Uptown 66 is an exploration of authentic Mexican street food through the lens of Chef Nuno.<br/><br/>Receiving national accreditation from Good Morning America with their birria taco winning \"Best Taco in America\". Despite the success of his first venture, Grullon had a vision for a much broader impact in Miami culinary and hospitality. Grullon set forward to bring a concept that would challenge him to push the boundaries of his skillset and creativity and showcase his culinary passion in a way Miami has yet to see fully. Grand Central would become the outlet for that passion. Opting for pure quality and perfect execution over innovation, Grullon would present American classics with subtle French influence raising the bar for what should be expected from the young restaurant group.";
+  
+  const passionText = data?.passion_text || "At Frankie's, every dish we serve is a testament to our unwavering passion for food and authentic Mexican tradition. It begins with our hand-pressed tortillas, crafted from heirloom corn sourced directly from Oaxaca, and extends to our award-winning Birria—slow-braised for hours with a proprietary blend of Mexican chilis.<br/><br/>Whether it's the notorious steak burrito or our famous loaded nachos layered with house-made cheese sauce, every ingredient is chosen for its quality and flavor. And of course, we always invite you to leave room for dessert: light, airy churros dipped in silky chocolate sauce, creamy caramel flan, and a tres leches cake that redefines the classic.";
+  const passionImageUrl = data?.passion_image_url || "/food-passion.png";
+  
+  const lifestyleImageUrl = data?.lifestyle_image_url || "/about-lifestyle.png";
 
   return (
     <div ref={sectionRef} style={{ background: '#fff' }}>
@@ -80,7 +100,7 @@ const AboutPage = ({ data }) => {
             textTransform: 'uppercase',
             marginBottom: '40px',
             color: '#1a1a1a'
-          }}>GET TO KNOW US</h1>
+          }}>{introTitle}</h1>
           
           <div style={{ maxWidth: '1250px' }}>
             <p className="fade-in" style={{
@@ -89,14 +109,14 @@ const AboutPage = ({ data }) => {
               lineHeight: 2, 
               color: '#333',
               marginBottom: '30px'
-            }}>{intro}</p>
+            }} dangerouslySetInnerHTML={{ __html: intro }}></p>
             
             <p className="fade-in" style={{
               fontFamily: '"Courier Prime", monospace', 
               fontSize: '15px',
               lineHeight: 2, 
               color: '#333'
-            }}>{story}</p>
+            }} dangerouslySetInnerHTML={{ __html: story }}></p>
           </div>
         </div>
       </section>
@@ -110,7 +130,7 @@ const AboutPage = ({ data }) => {
         width: '100%'
       }}>
         <img
-          src="https://images.unsplash.com/photo-1504544750208-dc0358e63f7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+          src={heroImage}
           alt="Restaurant interior"
           className="hero-bg"
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
@@ -145,8 +165,8 @@ const AboutPage = ({ data }) => {
               textTransform: 'uppercase',
               color: '#1a1a1a',
               marginBottom: '16px'
-            }}>CHEF NUNO GRULLON:</h2>
-            <p style={{
+            }}>{chefTitle}</h2>
+            <div style={{
               fontFamily: '"Montserrat", sans-serif',
               fontSize: '11px',
               fontWeight: 500,
@@ -154,13 +174,13 @@ const AboutPage = ({ data }) => {
               textTransform: 'uppercase',
               color: '#8a8580',
               lineHeight: 2
-            }}>PASSIONATE CREATIVITY<br />FROM THE BRONX TO MIAMI</p>
+            }} dangerouslySetInnerHTML={{ __html: chefSubtitle }}></div>
           </div>
 
           {/* Chef Image - Sticky on Desktop */}
           <div className="fade-in editorial-image-container sticky-fix" style={{ position: 'relative', overflow: 'hidden', height: '600px' }}>
             <img 
-              src="/chef-about.png" 
+              src={chefImageUrl} 
               alt="Chef Nuno Grullon" 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
             />
@@ -175,7 +195,7 @@ const AboutPage = ({ data }) => {
               lineHeight: 1.8,
               letterSpacing: '0.02em',
               color: '#333'
-            }} dangerouslySetInnerHTML={{ __html: "Chef Nuno Grullon, A New York native started working in restaurants at the early age of sixteen. Over the years while continuing expand his culinary knowledge and skill, started receiving recognition and accolades, appearing on Bravo's television show \"Best New Restaurant\" produced by Gordon Ramsay and has also toured central America with the culinary magazine \"Buen Provecho\". In 2019 Chef Nuno Grullon decided to put his skill and vision into his first business, on a unique corner of Biscayne Boulevard and NE 66th Street. Uptown 66 would become a welcome addition to Miami's Upper east Side MiMo District. Uptown 66 is an exploration of authentic Mexican street food through the lens of Chef Nuno.<br/><br/>Receiving national accreditation from Good Morning America with their birria taco winning \"Best Taco in America\". Despite the success of his first venture, Grullon had a vision for a much broader impact in Miami culinary and hospitality. Grullon set forward to bring a concept that would challenge him to push the boundaries of his skillset and creativity and showcase his culinary passion in a way Miami has yet to see fully. Grand Central would become the outlet for that passion. Opting for pure quality and perfect execution over innovation, Grullon would present American classics with subtle French influence raising the bar for what should be expected from the young restaurant group." }}>
+            }} dangerouslySetInnerHTML={{ __html: chefBio }}>
             </p>
           </div>
 
@@ -201,13 +221,10 @@ const AboutPage = ({ data }) => {
           <div style={{ textAlign: 'left', paddingTop: '40px' }} className="fade-in">
             {/* UPDATED SVG TO MATCH IMAGE 2 STYLE */}
             <svg width="100" height="auto" viewBox="0 0 80 100" fill="none" stroke="#1a1a1a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              {/* Left Shaker */}
               <path d="M20 35 V80 C20 85.5 24.5 90 30 90 C35.5 90 40 85.5 40 80 V35 H20Z" />
               <rect x="26" y="25" width="8" height="10" rx="1" />
               <line x1="28" y1="29" x2="32" y2="29" strokeWidth="1.5" />
               <line x1="28" y1="31" x2="32" y2="31" strokeWidth="1.5" />
-
-              {/* Right Shaker */}
               <path d="M50 35 V80 C50 85.5 54.5 90 60 90 C65.5 90 70 85.5 70 80 V35 H50Z" />
               <rect x="56" y="25" width="8" height="10" rx="1" />
               <line x1="58" y1="29" x2="62" y2="29" strokeWidth="1.5" />
@@ -222,15 +239,11 @@ const AboutPage = ({ data }) => {
               lineHeight: 2.2,
               letterSpacing: '0.02em',
               color: '#333'
-            }}>
-               At Frankie's, every dish we serve is a testament to our unwavering passion for food and authentic Mexican tradition. It begins with our hand-pressed tortillas, crafted from heirloom corn sourced directly from Oaxaca, and extends to our award-winning Birria—slow-braised for hours with a proprietary blend of Mexican chilis. 
-               <br/><br/>
-               Whether it's the notorious steak burrito or our famous loaded nachos layered with house-made cheese sauce, every ingredient is chosen for its quality and flavor. And of course, we always invite you to leave room for dessert: light, airy churros dipped in silky chocolate sauce, creamy caramel flan, and a tres leches cake that redefines the classic.
-            </p>
+            }} dangerouslySetInnerHTML={{ __html: passionText }}></p>
           </div>
           <div className="fade-in editorial-image-container" style={{ position: 'relative', overflow: 'hidden', height: '650px' }}>
             <img 
-              src="/food-passion.png" 
+              src={passionImageUrl} 
               alt="Frankie's food" 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
             />
@@ -241,7 +254,7 @@ const AboutPage = ({ data }) => {
       {/* Stretching Lifestyle Banner */}
       <section style={{ position: 'relative', zIndex: 10, height: '70vh', background: '#fff' }}>
         <img 
-          src="/about-lifestyle.png" 
+          src={lifestyleImageUrl} 
           alt="Outdoor dining" 
           style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
         />

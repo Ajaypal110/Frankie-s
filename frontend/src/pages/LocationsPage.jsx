@@ -1,22 +1,49 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-const locations = [
-  {
-    name: 'Agoura Hills',
-    city: 'Agoura Hills',
-    address: '28708 Roadside Drive, Agoura Hills, CA',
-    menuLink: '/agoura', // Force pointing to agoura page
-    image: '/locations-agoura.png',
-  },
-];
+import { API_BASE_URL } from '../config';
 
 const LocationsPage = () => {
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  const [data, setData] = useState(null);
+
+  useEffect(() => { 
+    window.scrollTo(0, 0); 
+    fetch(`${API_BASE_URL}/frankies/v1/locations?t=${new Date().getTime()}`)
+      .then(res => res.json())
+      .then(setData)
+      .catch(err => console.error("Could not load locations data:", err));
+  }, []);
+
+  const introTitle = data?.intro_title || 'LOCATIONS';
+
+  const locations = data ? Object.keys(data)
+    .filter(key => key.startsWith('location_') && key.endsWith('_name'))
+    .sort((a, b) => {
+      const numA = parseInt(a.match(/\d+/)[0]);
+      const numB = parseInt(b.match(/\d+/)[0]);
+      return numA - numB;
+    })
+    .map(key => {
+      const index = key.match(/\d+/)[0];
+      return {
+        name: data[key],
+        city: data[`location_${index}_city`],
+        address: data[`location_${index}_address`],
+        menuLink: data[`location_${index}_link`],
+        image: data[`location_${index}_image`],
+      };
+    })
+    .filter(loc => loc.name) : [
+      {
+        name: 'Agoura Hills',
+        city: 'Agoura Hills',
+        address: '28708 Roadside Drive, Agoura Hills, CA',
+        menuLink: '/agoura',
+        image: '/locations-agoura.png',
+      },
+    ];
 
   return (
     <div style={{ overflowX: 'hidden' }}>
-      {/* Reduced Height Hero Section */}
       <section className="locations-hero" style={{
         position: 'relative', 
         height: '35vh',
@@ -47,7 +74,6 @@ const LocationsPage = () => {
         }
       `}</style>
 
-      {/* Location Card Grid (Scaled Down) */}
       <section className="section-padding" style={{ background: '#F5F1EB', padding: 'clamp(40px, 10vw, 80px) 20px' }}>
         <div style={{
           maxWidth: '600px', margin: '0 auto',
@@ -55,7 +81,7 @@ const LocationsPage = () => {
           gap: '60px',
         }}>
           {locations.map((loc, idx) => (
-            <Link key={idx} to="/agoura" style={{ textDecoration: 'none', color: 'inherit', display: 'block', opacity: 1, visibility: 'visible' }}>
+            <Link key={idx} to={loc.menuLink || '/agoura'} style={{ textDecoration: 'none', color: 'inherit', display: 'block', opacity: 1, visibility: 'visible' }}>
               <div style={{
                 overflow: 'hidden', position: 'relative',
                 aspectRatio: '4/3', marginBottom: '24px',

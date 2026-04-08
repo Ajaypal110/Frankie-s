@@ -2,9 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 const Hero = ({ data }) => {
   const imgRef = useRef(null);
-  const heading = data?.title?.rendered || "FRANKIE'S";
-  const subtitle = data?.acf?.hero_subtitle ||
-    "AN EXPLORATION OF AUTHENTIC MEXICAN STREET FOOD. SOURCING FRESHEST LOCAL PRODUCE AND HIGHEST QUALITY MEATS AND SEAFOOD.";
+  const src = data?.hero_image_url || "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80";
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -18,7 +16,7 @@ const Hero = ({ data }) => {
       <img
         ref={imgRef}
         className="hero-bg"
-        src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+        src={src}
         alt="Mexican street food spread"
         loading="eager"
       />

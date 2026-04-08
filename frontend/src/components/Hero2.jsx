@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
-const Hero2 = () => {
+const Hero2 = ({ data }) => {
+  const src = data?.secondary_hero_image_url || "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80";
   return (
     <section className="hero-2-section" style={{
       position: 'sticky',
@@ -28,7 +29,7 @@ const Hero2 = () => {
           height: '100%',
           objectFit: 'cover'
         }}
-        src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+        src={src}
         alt="Delicious gourmet tacos"
       />
     </section>

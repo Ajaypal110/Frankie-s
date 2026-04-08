@@ -15,9 +15,27 @@ const defaultTestimonials = [
   }
 ];
 
-const TableTalk = ({ items }) => {
+const TableTalk = ({ data }) => {
   const sectionRef = useRef(null);
-  const testimonials = items && items.length > 0 ? items : defaultTestimonials;
+  
+  // Dynamically build testimonials array from data
+  const testimonials = [];
+  const count = data?.testimonial_count || 3;
+  for (let i = 1; i <= count; i++) {
+    const quote = data?.[`testimonial_${i}_quote`];
+    const author = data?.[`testimonial_${i}_author`];
+    if (quote || author) {
+      testimonials.push({
+        content: { rendered: quote || "" },
+        title: { rendered: author || "" }
+      });
+    }
+  }
+
+  // Fallback if no testimonials found
+  if (testimonials.length === 0 && !data) {
+    return null; // Don't render empty section
+  }
 
   useEffect(() => {
     const observer = new IntersectionObserver(

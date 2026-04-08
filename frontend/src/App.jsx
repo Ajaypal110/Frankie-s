@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { API_BASE_URL } from './config';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -13,46 +14,29 @@ import LocationsPage from './pages/LocationsPage';
 import AgouraHillsMenuPage from './pages/AgouraHillsMenuPage';
 import PressPage from './pages/PressPage';
 import AgouraHillsPage from './pages/AgouraHillsPage';
-import { WP_API_V2_ROOT } from './config';
 
 function HomePage() {
-  const [pageData, setPageData] = useState(null);
-  const [testimonials, setTestimonials] = useState([]);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (!WP_API_V2_ROOT) {
-      return;
-    }
-
-    fetch(`${WP_API_V2_ROOT}/pages?slug=home&_fields=id,title,acf,meta`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data && data.length > 0) {
-          setPageData(data[0]);
-        }
-      })
-      .catch(() => {});
-
-    fetch(`${WP_API_V2_ROOT}/testimonial?_fields=id,title,content`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data) && data.length > 0) {
-          setTestimonials(data);
-        }
-      })
-      .catch(() => {});
+    fetch(`${API_BASE_URL}/frankies/v1/home?t=${new Date().getTime()}`)
+      .then(res => res.json())
+      .then(setData)
+      .catch(err => console.error("Could not fetch home data", err));
   }, []);
+
+  if (!data) return null;
 
   return (
     <>
-      <Hero data={pageData} />
-      <SecretSauce data={pageData} />
+      <Hero data={data} />
+      <SecretSauce data={data} />
       <div style={{ position: 'relative' }}>
-        <Hero2 />
-        <TableTalk items={testimonials} />
+        <Hero2 data={data} />
+        <TableTalk data={data} />
       </div>
-      <ImageGrid />
+      <ImageGrid data={data} />
     </>
   );
 }
