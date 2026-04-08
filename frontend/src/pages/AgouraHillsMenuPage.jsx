@@ -16,31 +16,65 @@ const CAT_MAP = {
 };
 
 const DEFAULT_MENU_DATA = {
-  "Breakfast & More": { description: "All of our breakfast burritos come with eggs and tots. (Except our vegan options) Any burrito can be made in a bowl, served \"wet\" or fried chimichanga style!", count: 11 },
-  "Lunch & More": { description: "All of our lunch burritos come with rice and pinto beans. No eggs, no tots! Perfect for a delicious lunch on the go or sit in.", count: 10 },
-  "Kids": { description: "Smaller portions, same big flavor! Perfect for our younger Frankie's fans.", count: 3 },
-  "Drinks": { description: "Made fresh in-house with the brightest ingredients. Simple, vibrant, and refreshingly real. Never Faked.", count: 4 },
-  "Desserts": { description: "Sweet treats to end your Frankie's experience on a high note.", count: 6 },
-  "Sides": { description: "The perfect accompaniments fried in decadent beef tallow for ultimate crunch.", count: 4 },
-  "Catering": { description: "WE MUST HAVE 48 HOURS ADVANCE NOTICE. Guaranteed to be the talk of the town!", count: 3 }
+  "Breakfast & More": { 
+    description: "All of our breakfast burritos come with eggs and tots. (Except our vegan options) Any burrito can be made in a bowl, served \"wet\" or fried chimichanga style!", 
+    items: [
+      { name: "The Sunrise", price: "$15.50", image: "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&q=80&w=800", description: "Rise and shine in style! Cage-free soft scrambled eggs, artisanal smoked Niman Ranch bacon, golden crack tater tots, velvety cheddar queso, and chipotle aioli." },
+      { name: "The Southwestern Supreme", price: "$17.50", image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&q=80&w=800", description: "Go bold at breakfast! Cage-free soft scrambled eggs, zesty chorizo, and melty pepper jack queso. Crispy crack tater tots and creamy avocado join the mix." },
+      { name: "The Sol Verde (Green Sun)", price: "$18.50", image: "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?auto=format&fit=crop&q=80&w=800", description: "Start your day with plant-powered flavor! Savory vegan chorizo, crispy cracked potatoes, and a golden tumeric scramble." }
+    ]
+  },
+  "Lunch & More": { 
+    description: "All of our lunch burritos come with rice and pinto beans. No eggs, no tots! Perfect for a delicious lunch on the go or sit in.", 
+    items: [
+      { name: "SW Supreme", price: "$17.50", image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&q=80&w=800", description: "House-made chorizo, rice and beans, pepper jack queso, avocado salsa, pico de gallo, grilled flour tortilla." },
+      { name: "THE HAWK", price: "$19.50", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=800", description: "Grass-fed flank steak, rice and pinto beans, cheddar queso, pico de gallo, chipotle aioli." }
+    ]
+  },
+  "Kids": { 
+    description: "Smaller portions, same big flavor! Perfect for our younger Frankie's fans.", 
+    items: [
+      { name: "Kids Bacon Egg Cheese Burrito", price: "$10.95", image: "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&q=80&w=800", description: "Mini flour tortilla, eggs, bacon and shredded cheddar cheese." }
+    ]
+  },
+  "Drinks": { 
+    description: "Made fresh in-house with the brightest ingredients. Simple, vibrant, and refreshingly real. Never Faked.", 
+    items: [
+      { name: "Pineapple Mango Fresca", price: "$7.50", image: "https://images.unsplash.com/photo-1481671703460-040cb8a2d909?auto=format&fit=crop&q=80&w=800", description: "Tropical pineapple and sweet mango infusion." }
+    ]
+  },
+  "Desserts": { 
+    description: "Sweet treats to end your Frankie's experience on a high note.", 
+    items: [
+      { name: "House-Made Churros", price: "$4.50", image: "https://images.unsplash.com/photo-1599785209707-a456fc1337bb?auto=format&fit=crop&q=80&w=800", description: "Crispy on the outside, soft inside, tossed in cinnamon sugar." }
+    ]
+  },
+  "Sides": { 
+    description: "The perfect accompaniments fried in decadent beef tallow for ultimate crunch.", 
+    items: [
+      { name: "Cracked Tots", price: "$6.50", image: "https://images.unsplash.com/photo-1573016608964-b49e66ec3692?auto=format&fit=crop&q=80&w=800", description: "Perfectly crisp, dangerously good. Cooked in decadent beef tallow." }
+    ]
+  },
+  "Catering": { 
+    description: "WE MUST HAVE 48 HOURS ADVANCE NOTICE. Guaranteed to be the talk of the town!", 
+    items: [
+      { name: "Fiesta Pack", price: "$150.00", image: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&q=80&w=800", description: "Feeds up to 10 people. Mix and match any of our starter burritos." }
+    ]
+  }
 };
 
 const buildMenuData = (apiData) => {
   const result = {};
   for (const [uiLabel, conf] of Object.entries(DEFAULT_MENU_DATA)) {
     const slug = CAT_MAP[uiLabel];
-    result[uiLabel] = {
-      description: apiData?.[`${slug}_description`] || conf.description,
-      items: []
-    };
     
-    // Loop until we find no more items for this category
+    // Determine if we have real items from API for this category
+    const apiItems = [];
     let i = 1;
-    while (true) {
+    while (apiData) {
         const name = apiData?.[`${slug}_${i}_name`];
-        if (!name) break; // End of list
-
-        result[uiLabel].items.push({
+        if (!name) break;
+        apiItems.push({
             id: `${slug}_${i}`,
             name: name,
             price: apiData[`${slug}_${i}_price`] || '',
@@ -50,6 +84,15 @@ const buildMenuData = (apiData) => {
         });
         i++;
     }
+
+    result[uiLabel] = {
+      description: apiData?.[`${slug}_description`] || conf.description,
+      items: apiItems.length > 0 ? apiItems : conf.items.map((it, idx) => ({ 
+        id: `fallback_${slug}_${idx}`, 
+        ...it, 
+        orderLink: ORDER_BASE_URL 
+      }))
+    };
   }
   return result;
 };
