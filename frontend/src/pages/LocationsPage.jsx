@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { API_BASE_URL } from '../config';
 
 const LocationsPage = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({});
 
   useEffect(() => { 
     window.scrollTo(0, 0); 

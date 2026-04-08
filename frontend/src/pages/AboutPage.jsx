@@ -3,7 +3,7 @@ import { API_BASE_URL } from '../config';
 
 const AboutPage = () => {
   const sectionRef = useRef(null);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({});
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -40,11 +40,11 @@ const AboutPage = () => {
   const heroImage = data?.hero_image_url || "https://images.unsplash.com/photo-1504544750208-dc0358e63f7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80";
   
   const chefTitle = data?.chef_title || "CHEF NUNO GRULLON:";
-  const chefSubtitle = data?.chef_subtitle || "PASSIONATE CREATIVITY<br />FROM THE BRONX TO MIAMI";
+  const chefSubtitle = data?.chef_subtitle || "PASSIONATE CREATIVITY\nFROM THE BRONX TO MIAMI";
   const chefImageUrl = data?.chef_image_url || "/chef-about.png";
-  const chefBio = data?.chef_bio || "Chef Nuno Grullon, A New York native started working in restaurants at the early age of sixteen. Over the years while continuing expand his culinary knowledge and skill, started receiving recognition and accolades, appearing on Bravo's television show \"Best New Restaurant\" produced by Gordon Ramsay and has also toured central America with the culinary magazine \"Buen Provecho\". In 2019 Chef Nuno Grullon decided to put his skill and vision into his first business, on a unique corner of Biscayne Boulevard and NE 66th Street. Uptown 66 would become a welcome addition to Miami's Upper east Side MiMo District. Uptown 66 is an exploration of authentic Mexican street food through the lens of Chef Nuno.<br/><br/>Receiving national accreditation from Good Morning America with their birria taco winning \"Best Taco in America\". Despite the success of his first venture, Grullon had a vision for a much broader impact in Miami culinary and hospitality. Grullon set forward to bring a concept that would challenge him to push the boundaries of his skillset and creativity and showcase his culinary passion in a way Miami has yet to see fully. Grand Central would become the outlet for that passion. Opting for pure quality and perfect execution over innovation, Grullon would present American classics with subtle French influence raising the bar for what should be expected from the young restaurant group.";
+  const chefBio = data?.chef_bio || "Chef Nuno Grullon, A New York native started working in restaurants at the early age of sixteen. Over the years while continuing expand his culinary knowledge and skill, started receiving recognition and accolades, appearing on Bravo's television show \"Best New Restaurant\" produced by Gordon Ramsay and has also toured central America with the culinary magazine \"Buen Provecho\". In 2019 Chef Nuno Grullon decided to put his skill and vision into his first business, on a unique corner of Biscayne Boulevard and NE 66th Street. Uptown 66 would become a welcome addition to Miami's Upper east Side MiMo District. Uptown 66 is an exploration of authentic Mexican street food through the lens of Chef Nuno.\n\nReceiving national accreditation from Good Morning America with their birria taco winning \"Best Taco in America\". Despite the success of his first venture, Grullon had a vision for a much broader impact in Miami culinary and hospitality. Grullon set forward to bring a concept that would challenge him to push the boundaries of his skillset and creativity and showcase his culinary passion in a way Miami has yet to see fully. Grand Central would become the outlet for that passion. Opting for pure quality and perfect execution over innovation, Grullon would present American classics with subtle French influence raising the bar for what should be expected from the young restaurant group.";
   
-  const passionText = data?.passion_text || "At Frankie's, every dish we serve is a testament to our unwavering passion for food and authentic Mexican tradition. It begins with our hand-pressed tortillas, crafted from heirloom corn sourced directly from Oaxaca, and extends to our award-winning Birria—slow-braised for hours with a proprietary blend of Mexican chilis.<br/><br/>Whether it's the notorious steak burrito or our famous loaded nachos layered with house-made cheese sauce, every ingredient is chosen for its quality and flavor. And of course, we always invite you to leave room for dessert: light, airy churros dipped in silky chocolate sauce, creamy caramel flan, and a tres leches cake that redefines the classic.";
+  const passionText = data?.passion_text || "At Frankie's, every dish we serve is a testament to our unwavering passion for food and authentic Mexican tradition. It begins with our hand-pressed tortillas, crafted from heirloom corn sourced directly from Oaxaca, and extends to our award-winning Birria—slow-braised for hours with a proprietary blend of Mexican chilis.\n\nWhether it's the notorious steak burrito or our famous loaded nachos layered with house-made cheese sauce, every ingredient is chosen for its quality and flavor. And of course, we always invite you to leave room for dessert: light, airy churros dipped in silky chocolate sauce, creamy caramel flan, and a tres leches cake that redefines the classic.";
   const passionImageUrl = data?.passion_image_url || "/food-passion.png";
   
   const lifestyleImageUrl = data?.lifestyle_image_url || "/about-lifestyle.png";
@@ -108,15 +108,17 @@ const AboutPage = () => {
               fontSize: '15px',
               lineHeight: 2, 
               color: '#333',
-              marginBottom: '30px'
-            }} dangerouslySetInnerHTML={{ __html: intro }}></p>
+              marginBottom: '30px',
+              whiteSpace: 'pre-wrap'
+            }}>{intro}</p>
             
             <p className="fade-in" style={{
               fontFamily: '"Courier Prime", monospace', 
               fontSize: '15px',
               lineHeight: 2, 
-              color: '#333'
-            }} dangerouslySetInnerHTML={{ __html: story }}></p>
+              color: '#333',
+              whiteSpace: 'pre-wrap'
+            }}>{story}</p>
           </div>
         </div>
       </section>
@@ -173,8 +175,9 @@ const AboutPage = () => {
               letterSpacing: '0.3em',
               textTransform: 'uppercase',
               color: '#8a8580',
-              lineHeight: 2
-            }} dangerouslySetInnerHTML={{ __html: chefSubtitle }}></div>
+              lineHeight: 2,
+              whiteSpace: 'pre-wrap'
+            }}>{chefSubtitle}</div>
           </div>
 
           {/* Chef Image - Sticky on Desktop */}
@@ -194,9 +197,9 @@ const AboutPage = () => {
               fontWeight: 400,
               lineHeight: 1.8,
               letterSpacing: '0.02em',
-              color: '#333'
-            }} dangerouslySetInnerHTML={{ __html: chefBio }}>
-            </p>
+              color: '#333',
+              whiteSpace: 'pre-wrap'
+            }}>{chefBio}</p>
           </div>
 
         </div>
@@ -238,8 +241,9 @@ const AboutPage = () => {
               fontWeight: 400,
               lineHeight: 2.2,
               letterSpacing: '0.02em',
-              color: '#333'
-            }} dangerouslySetInnerHTML={{ __html: passionText }}></p>
+              color: '#333',
+              whiteSpace: 'pre-wrap'
+            }}>{passionText}</p>
           </div>
           <div className="fade-in editorial-image-container" style={{ position: 'relative', overflow: 'hidden', height: '650px' }}>
             <img 

@@ -16,7 +16,7 @@ import PressPage from './pages/PressPage';
 import AgouraHillsPage from './pages/AgouraHillsPage';
 
 function HomePage() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({});
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -25,8 +25,6 @@ function HomePage() {
       .then(setData)
       .catch(err => console.error("Could not fetch home data", err));
   }, []);
-
-  if (!data) return null;
 
   return (
     <>

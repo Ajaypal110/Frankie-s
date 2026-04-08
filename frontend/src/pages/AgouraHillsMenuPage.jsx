@@ -57,8 +57,8 @@ const buildMenuData = (apiData) => {
 const AgouraHillsMenuPage = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
-  const [data, setData] = useState(null);
-  const [menuData, setMenuData] = useState({});
+  const [data, setData] = useState({});
+  const [menuData, setMenuData] = useState(buildMenuData(null));
 
   useEffect(() => {
     window.scrollTo(0, 0);
