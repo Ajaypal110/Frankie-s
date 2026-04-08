@@ -13,8 +13,7 @@ import LocationsPage from './pages/LocationsPage';
 import AgouraHillsMenuPage from './pages/AgouraHillsMenuPage';
 import PressPage from './pages/PressPage';
 import AgouraHillsPage from './pages/AgouraHillsPage';
-
-const WP_API_URL = 'http://localhost:8884/wp-json/wp/v2';
+import { WP_API_V2_ROOT } from './config';
 
 function HomePage() {
   const [pageData, setPageData] = useState(null);
@@ -22,14 +21,26 @@ function HomePage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetch(`${WP_API_URL}/pages?slug=home&_fields=id,title,acf,meta`)
-      .then(res => res.json())
-      .then(data => { if (data && data.length > 0) setPageData(data[0]); })
+    if (!WP_API_V2_ROOT) {
+      return;
+    }
+
+    fetch(`${WP_API_V2_ROOT}/pages?slug=home&_fields=id,title,acf,meta`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.length > 0) {
+          setPageData(data[0]);
+        }
+      })
       .catch(() => {});
 
-    fetch(`${WP_API_URL}/testimonial?_fields=id,title,content`)
-      .then(res => res.json())
-      .then(data => { if (Array.isArray(data) && data.length > 0) setTestimonials(data); })
+    fetch(`${WP_API_V2_ROOT}/testimonial?_fields=id,title,content`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setTestimonials(data);
+        }
+      })
       .catch(() => {});
   }, []);
 
@@ -47,6 +58,17 @@ function HomePage() {
 }
 
 function App() {
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const redirectPath = params.get('redirect');
+
+    if (!redirectPath) {
+      return;
+    }
+
+    window.history.replaceState({}, '', redirectPath);
+  }, []);
+
   return (
     <Router>
       <Navbar />

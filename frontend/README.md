@@ -1,12 +1,51 @@
-# React + Vite
+# Frankie's Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Production-ready React/Vite frontend for the Frankie's site.
 
-Currently, two official plugins are available:
+## Environment variables
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Copy `.env.example` to `.env.local` for local work.
 
-## Expanding the ESLint configuration
+```bash
+cp .env.example .env.local
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Required values:
+
+- `VITE_WP_BASE_URL`: Public base URL of the WordPress backend, for example `https://cms.example.com`
+
+Optional values:
+
+- `VITE_ORDER_BASE_URL`: Override for the Toast ordering URL
+
+## Local development
+
+```bash
+npm install
+npm run dev
+```
+
+The app defaults to `http://localhost:8884` for WordPress only in local development. Production should always set `VITE_WP_BASE_URL`.
+
+## Vercel deployment
+
+Set the Vercel project root to `frontend/`.
+
+Add these environment variables in Vercel:
+
+- `VITE_WP_BASE_URL`
+- `VITE_ORDER_BASE_URL` if you want to override the current Toast URL
+
+Your WordPress API must also be publicly reachable from the Vercel domain and allow cross-origin requests if it is hosted on a different origin.
+
+This repo already includes:
+
+- `vercel.json` for SPA rewrites and asset caching
+- a client config module that removes hardcoded localhost URLs
+- a build path that does not depend on Tailwind/PostCSS integration
+
+## Build
+
+```bash
+npm run build
+```

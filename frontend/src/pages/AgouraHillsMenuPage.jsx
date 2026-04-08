@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { ORDER_BASE_URL } from '../config';
 
 const CATEGORIES = [
   "All",
@@ -10,8 +11,6 @@ const CATEGORIES = [
   "Sides", 
   "Catering"
 ];
-
-const ORDER_BASE_URL = "https://frankiesbreakfastburritos.toast.site/order/frankies-breakfast-burritos-28708-roadside-drive";
 
 const MENU_DATA = {
   "Breakfast & More": {
