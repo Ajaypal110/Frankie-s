@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { API_BASE_URL } from './config';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Hero2 from './components/Hero2';
@@ -40,33 +40,48 @@ function HomePage() {
 }
 
 function App() {
+  const location = useLocation();
+
   useEffect(() => {
+    // Dynamic Title Logic
+    const titles = {
+      '/': "HOME | FRANKIE'S",
+      '/about': "ABOUT | FRANKIE'S",
+      '/locations': "LOCATIONS | FRANKIE'S",
+      '/agourahillsmenu': "MENU | FRANKIE'S",
+      '/press': "PRESS | FRANKIE'S",
+      '/agoura': "AGOURA HILLS | FRANKIE'S"
+    };
+    document.title = titles[location.pathname] || "FRANKIE'S";
+
+    // Redirect logic
     const params = new URLSearchParams(window.location.search);
     const redirectPath = params.get('redirect');
-
-    if (!redirectPath) {
-      return;
+    if (redirectPath) {
+      window.history.replaceState({}, '', redirectPath);
     }
+  }, [location]);
 
-    window.history.replaceState({}, '', redirectPath);
-  }, []);
+  return (
+    <main>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/locations" element={<LocationsPage />} />
+        <Route path="/agourahillsmenu" element={<AgouraHillsMenuPage location="Agoura Hills" />} />
+        <Route path="/press" element={<PressPage />} />
+        <Route path="/agoura" element={<AgouraHillsPage />} />
+      </Routes>
+    </main>
+  );
+}
 
+export default function Root() {
   return (
     <Router>
       <Navbar />
-      <main>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/locations" element={<LocationsPage />} />
-          <Route path="/agourahillsmenu" element={<AgouraHillsMenuPage location="Agoura Hills" />} />
-          <Route path="/press" element={<PressPage />} />
-          <Route path="/agoura" element={<AgouraHillsPage />} />
-        </Routes>
-      </main>
+      <App />
       <Footer />
     </Router>
   );
 }
-
-export default App;

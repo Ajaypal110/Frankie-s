@@ -19,8 +19,8 @@ const TableTalk = ({ data }) => {
   const sectionRef = useRef(null);
   
   // Dynamically build testimonials array from data
-  const testimonials = [];
-  const count = data?.testimonial_count || 3;
+  let testimonials = [];
+  const count = data?.testimonial_count || 0;
   for (let i = 1; i <= count; i++) {
     const quote = data?.[`testimonial_${i}_quote`];
     const author = data?.[`testimonial_${i}_author`];
@@ -32,9 +32,9 @@ const TableTalk = ({ data }) => {
     }
   }
 
-  // Fallback if no testimonials found
-  if (testimonials.length === 0 && !data) {
-    return null; // Don't render empty section
+  // Fallback to default testimonials if none provided by API
+  if (testimonials.length === 0) {
+    testimonials = defaultTestimonials;
   }
 
   useEffect(() => {
