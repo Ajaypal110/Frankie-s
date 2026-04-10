@@ -74,7 +74,7 @@ const Footer = () => {
               <a href={settings?.instagram_url || "https://instagram.com"} className="footer-link" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
               {settings?.facebook_url && <a href={settings.facebook_url} className="footer-link" target="_blank" rel="noopener noreferrer">FACEBOOK</a>}
               <a href={settings?.order_online_url || "#"} className="footer-link" target="_blank" rel="noopener noreferrer">ORDER ONLINE</a>
-              <a href={settings?.reservations_url || "#"} className="footer-link" target="_blank" rel="noopener noreferrer">RESERVATIONS</a>
+
             </nav>
           </div>
         </div>
