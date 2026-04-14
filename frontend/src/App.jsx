@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { API_BASE_URL } from './config';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Loading from './components/Loading';
 import Hero from './components/Hero';
 import Hero2 from './components/Hero2';
 import SecretSauce from './components/SecretSauce';
@@ -17,14 +18,23 @@ import AgouraHillsPage from './pages/AgouraHillsPage';
 
 function HomePage() {
   const [data, setData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     fetch(`${API_BASE_URL}/frankies/v1/home?t=${new Date().getTime()}`)
       .then(res => res.json())
-      .then(setData)
-      .catch(err => console.error("Could not fetch home data", err));
+      .then(json => {
+        setData(json);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.error("Could not fetch home data", err);
+        setIsLoading(false);
+      });
   }, []);
+
+  if (isLoading) return <Loading />;
 
   return (
     <>

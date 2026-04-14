@@ -2,17 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SlidingGallery from '../components/SlidingGallery';
 import { API_BASE_URL } from '../config';
+import Loading from '../components/Loading';
 
 const AgouraHillsPage = () => {
   const [data, setData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     fetch(`${API_BASE_URL}/frankies/v1/agoura?t=${new Date().getTime()}`)
       .then(res => res.json())
-      .then(setData)
-      .catch(err => console.error("Could not load agoura data:", err));
+      .then(json => {
+        setData(json);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.error("Could not load agoura data:", err);
+        setIsLoading(false);
+      });
   }, []);
+
+  if (isLoading) return <Loading />;
 
   const heroImage = data?.hero_image_url || '/locations-agoura.png';
   const narrativeText = data?.narrative_text || "Nestled in the heart of the Santa Monica Mountains canyons, Frankies Agoura Hills brings the award-winning street food soul of MiMo to the West Coast. With a focus on rugged mountain aesthetics and modern rustic charm, it's a destination for those who appreciate pure quality and cinematic atmosphere.";

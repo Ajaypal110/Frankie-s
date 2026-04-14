@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ORDER_BASE_URL, API_BASE_URL } from '../config';
+import Loading from '../components/Loading';
 
 const CATEGORIES = [
   "All", "Breakfast & More", "Lunch & More", "Kids", "Drinks", "Desserts", "Sides", "Catering"
@@ -101,7 +102,8 @@ const AgouraHillsMenuPage = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [data, setData] = useState({});
-  const [menuData, setMenuData] = useState(buildMenuData(null));
+  const [menuData, setMenuData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -110,12 +112,16 @@ const AgouraHillsMenuPage = () => {
       .then(json => {
          setData(json);
          setMenuData(buildMenuData(json));
+         setIsLoading(false);
       })
       .catch(err => {
          console.error("Failed to fetch menu", err);
          setMenuData(buildMenuData(null));
+         setIsLoading(false);
       });
   }, []);
+
+  if (isLoading) return <Loading />;
 
   const renderGrid = (items) => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '40px' }}>

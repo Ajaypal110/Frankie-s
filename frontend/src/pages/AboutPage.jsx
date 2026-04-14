@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { API_BASE_URL } from '../config';
+import Loading from '../components/Loading';
 
 const AboutPage = () => {
   const sectionRef = useRef(null);
   const [data, setData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -11,8 +13,18 @@ const AboutPage = () => {
     // Fetch dynamic about page data (appended timestamp to prevent aggressive browser caching)
     fetch(`${API_BASE_URL}/frankies/v1/about?t=${new Date().getTime()}`)
       .then(res => res.json())
-      .then(setData)
-      .catch(err => console.error("Failed to load About page content:", err));
+      .then(json => {
+        setData(json);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.error("Failed to load About page content:", err);
+        setIsLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (isLoading || !sectionRef.current) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -26,11 +38,11 @@ const AboutPage = () => {
       },
       { threshold: 0.1 }
     );
-    if (sectionRef.current) {
-      sectionRef.current.querySelectorAll('section').forEach(s => observer.observe(s));
-    }
+
+    sectionRef.current.querySelectorAll('section').forEach(s => observer.observe(s));
+    
     return () => observer.disconnect();
-  }, []);
+  }, [isLoading]);
 
   // Set up fallbacks gracefully matching the original static content
   const introTitle = data?.intro_title || "GET TO KNOW US";
@@ -48,6 +60,8 @@ const AboutPage = () => {
   const passionImageUrl = data?.passion_image_url || "/food-passion.png";
   
   const lifestyleImageUrl = data?.lifestyle_image_url || "/about-lifestyle.png";
+
+  if (isLoading) return <Loading />;
 
   return (
     <div ref={sectionRef} style={{ background: '#fff' }}>
