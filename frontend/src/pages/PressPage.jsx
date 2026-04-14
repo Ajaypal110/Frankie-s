@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { API_BASE_URL } from '../config';
+import { getCache, setCache } from '../utils/cacheHelper';
 import Loading from '../components/Loading';
 
 const PressPage = () => {
-  const [data, setData] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState(getCache('press') || {});
+  const [isLoading, setIsLoading] = useState(!getCache('press'));
 
   useEffect(() => { 
     window.scrollTo(0, 0); 
@@ -12,6 +13,7 @@ const PressPage = () => {
       .then(res => res.json())
       .then(json => {
         setData(json);
+        setCache('press', json);
         setIsLoading(false);
       })
       .catch(err => {

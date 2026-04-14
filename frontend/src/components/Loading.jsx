@@ -28,7 +28,7 @@ const Loading = () => {
           style={{
             width: '80px',
             height: 'auto',
-            animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            animation: 'pulse 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             filter: 'grayscale(1)'
           }}
         />
@@ -40,7 +40,7 @@ const Loading = () => {
           border: '2px solid rgba(26, 26, 26, 0.05)',
           borderTop: '2px solid #1a1a1a',
           borderRadius: '50%',
-          animation: 'spin 1.5s linear infinite'
+          animation: 'spin 1s linear infinite'
         }} />
       </div>
 

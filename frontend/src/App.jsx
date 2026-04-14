@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { API_BASE_URL } from './config';
+import { getCache, setCache } from './utils/cacheHelper';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Loading from './components/Loading';
@@ -17,8 +18,8 @@ import PressPage from './pages/PressPage';
 import AgouraHillsPage from './pages/AgouraHillsPage';
 
 function HomePage() {
-  const [data, setData] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState(getCache('home') || {});
+  const [isLoading, setIsLoading] = useState(!getCache('home'));
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -26,6 +27,7 @@ function HomePage() {
       .then(res => res.json())
       .then(json => {
         setData(json);
+        setCache('home', json);
         setIsLoading(false);
       })
       .catch(err => {

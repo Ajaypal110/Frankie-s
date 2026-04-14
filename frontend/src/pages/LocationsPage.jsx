@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { API_BASE_URL } from '../config';
+import { getCache, setCache } from '../utils/cacheHelper';
 import Loading from '../components/Loading';
 
 const LocationsPage = () => {
-  const [data, setData] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState(getCache('locations') || {});
+  const [isLoading, setIsLoading] = useState(!getCache('locations'));
 
   useEffect(() => { 
     window.scrollTo(0, 0); 
@@ -13,6 +14,7 @@ const LocationsPage = () => {
       .then(res => res.json())
       .then(json => {
         setData(json);
+        setCache('locations', json);
         setIsLoading(false);
       })
       .catch(err => {

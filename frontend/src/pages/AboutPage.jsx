@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { API_BASE_URL } from '../config';
+import { getCache, setCache } from '../utils/cacheHelper';
 import Loading from '../components/Loading';
 
 const AboutPage = () => {
   const sectionRef = useRef(null);
-  const [data, setData] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState(getCache('about') || {});
+  const [isLoading, setIsLoading] = useState(!getCache('about'));
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -15,6 +16,7 @@ const AboutPage = () => {
       .then(res => res.json())
       .then(json => {
         setData(json);
+        setCache('about', json);
         setIsLoading(false);
       })
       .catch(err => {

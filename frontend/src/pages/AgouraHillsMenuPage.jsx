@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ORDER_BASE_URL, API_BASE_URL } from '../config';
+import { getCache, setCache } from '../utils/cacheHelper';
 import Loading from '../components/Loading';
 
 const CATEGORIES = [
@@ -101,9 +102,9 @@ const buildMenuData = (apiData) => {
 const AgouraHillsMenuPage = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
-  const [data, setData] = useState({});
-  const [menuData, setMenuData] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState(getCache('menu') || {});
+  const [menuData, setMenuData] = useState(buildMenuData(getCache('menu')));
+  const [isLoading, setIsLoading] = useState(!getCache('menu'));
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -112,11 +113,12 @@ const AgouraHillsMenuPage = () => {
       .then(json => {
          setData(json);
          setMenuData(buildMenuData(json));
+         setCache('menu', json);
          setIsLoading(false);
       })
       .catch(err => {
          console.error("Failed to fetch menu", err);
-         setMenuData(buildMenuData(null));
+         if (!getCache('menu')) setMenuData(buildMenuData(null));
          setIsLoading(false);
       });
   }, []);

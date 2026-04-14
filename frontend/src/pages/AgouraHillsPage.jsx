@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SlidingGallery from '../components/SlidingGallery';
 import { API_BASE_URL } from '../config';
+import { getCache, setCache } from '../utils/cacheHelper';
 import Loading from '../components/Loading';
 
 const AgouraHillsPage = () => {
-  const [data, setData] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState(getCache('agoura') || {});
+  const [isLoading, setIsLoading] = useState(!getCache('agoura'));
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -14,6 +15,7 @@ const AgouraHillsPage = () => {
       .then(res => res.json())
       .then(json => {
         setData(json);
+        setCache('agoura', json);
         setIsLoading(false);
       })
       .catch(err => {
