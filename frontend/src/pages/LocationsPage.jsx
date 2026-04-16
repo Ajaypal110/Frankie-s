@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import MediaElement from '../components/MediaElement';
 import { API_BASE_URL } from '../config';
 import { getCache, setCache } from '../utils/cacheHelper';
 import Loading from '../components/Loading';
@@ -98,7 +99,7 @@ const LocationsPage = () => {
                 overflow: 'hidden', position: 'relative',
                 aspectRatio: '4/3', marginBottom: '24px',
               }}>
-                <img src={loc.image} alt={loc.name} className="safe-hover-scale" style={{
+                <MediaElement src={loc.image} alt={loc.name} className="safe-hover-scale" style={{
                   width: '100%', height: '100%', objectFit: 'cover',
                 }} />
               </div>

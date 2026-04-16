@@ -1,4 +1,5 @@
 import React from 'react';
+import MediaElement from './MediaElement';
 
 const ImageGrid = ({ data }) => {
   const img1 = data?.grid_image_1_url || "/grid-cocktail.png";
@@ -45,13 +46,13 @@ const ImageGrid = ({ data }) => {
         }}>
         {/* Left Column */}
         <div className="image-col" style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <img 
+          <MediaElement 
             className="image-item img-h-small"
             src={img1} 
             alt="Signature Cocktail" 
             style={{ width: '100%', objectFit: 'cover', display: 'block', background: '#eee' }}
           />
-          <img 
+          <MediaElement 
             className="image-item img-h-small"
             src={img2} 
             alt="Fried Calamari" 
@@ -61,13 +62,13 @@ const ImageGrid = ({ data }) => {
 
         {/* Right Column */}
         <div className="image-col" style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <img 
+          <MediaElement 
             className="image-item img-h-med"
             src={img3} 
             alt="Oyster Platter" 
             style={{ width: '100%', objectFit: 'cover', display: 'block', background: '#eee' }}
           />
-          <img 
+          <MediaElement 
             className="image-item img-h-vsmall"
             src={img4} 
             alt="Churros with Chocolate" 

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { API_BASE_URL } from '../config';
+import MediaElement from '../components/MediaElement';
 import { getCache, setCache } from '../utils/cacheHelper';
 import Loading from '../components/Loading';
 
@@ -147,7 +148,7 @@ const AboutPage = () => {
         zIndex: 1,
         width: '100%'
       }}>
-        <img
+        <MediaElement
           src={heroImage}
           alt="Restaurant interior"
           className="hero-bg"
@@ -198,7 +199,7 @@ const AboutPage = () => {
 
           {/* Chef Image - Sticky on Desktop */}
           <div className="fade-in editorial-image-container sticky-fix" style={{ position: 'relative', overflow: 'hidden', height: '600px' }}>
-            <img 
+            <MediaElement 
               src={chefImageUrl} 
               alt="Chef Nuno Grullon" 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
@@ -262,7 +263,7 @@ const AboutPage = () => {
             }}>{passionText}</p>
           </div>
           <div className="fade-in editorial-image-container" style={{ position: 'relative', overflow: 'hidden', height: '650px' }}>
-            <img 
+            <MediaElement 
               src={passionImageUrl} 
               alt="Frankie's food" 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
@@ -273,7 +274,7 @@ const AboutPage = () => {
 
       {/* Stretching Lifestyle Banner */}
       <section style={{ position: 'relative', zIndex: 10, height: '70vh', background: '#fff' }}>
-        <img 
+        <MediaElement 
           src={lifestyleImageUrl} 
           alt="Outdoor dining" 
           style={{ width: '100%', height: '100%', objectFit: 'cover' }} 

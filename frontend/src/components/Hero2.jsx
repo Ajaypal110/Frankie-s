@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
+import MediaElement from './MediaElement';
 
 const Hero2 = ({ data }) => {
   const src = data?.secondary_hero_image_url || "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80";
@@ -21,7 +22,7 @@ const Hero2 = ({ data }) => {
           }
         }
       `}</style>
-      <img
+      <MediaElement
         style={{
           position: 'absolute',
           inset: 0,

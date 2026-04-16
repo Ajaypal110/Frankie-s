@@ -750,9 +750,16 @@ final class Frankies_Content_Manager {
 						<div class="frankies-home-preview-card">
 							<div class="frankies-home-preview-label"><?php echo esc_html( $field_label ); ?></div>
 							<?php if ( ! empty( $value ) ) : ?>
-								<img src="<?php echo esc_url( $value ); ?>" alt="<?php echo esc_attr( $field_label ); ?>" class="frankies-home-preview-image">
+								<?php
+								$ext = strtolower( pathinfo( wp_parse_url( $value, PHP_URL_PATH ) ?: '', PATHINFO_EXTENSION ) );
+								$video_exts = array( 'mp4', 'webm', 'ogg', 'mov', 'm4v', 'avi' );
+								if ( in_array( $ext, $video_exts, true ) ) : ?>
+									<video src="<?php echo esc_url( $value ); ?>" class="frankies-home-preview-image" muted autoplay loop playsinline></video>
+								<?php else : ?>
+									<img src="<?php echo esc_url( $value ); ?>" alt="<?php echo esc_attr( $field_label ); ?>" class="frankies-home-preview-image">
+								<?php endif; ?>
 							<?php else : ?>
-								<div class="frankies-home-preview-empty">No image selected</div>
+								<div class="frankies-home-preview-empty">No media selected</div>
 							<?php endif; ?>
 						</div>
 					<?php endforeach; ?>
@@ -797,7 +804,7 @@ final class Frankies_Content_Manager {
 	private function get_field_type( array|string $definition ): string { return is_array( $definition ) && isset( $definition['type'] ) ? $definition['type'] : 'text'; }
 	private function get_field_label( string $key, array|string $definition ): string { if ( is_array( $definition ) && isset( $definition['label'] ) ) return $definition['label']; return ucwords( str_replace( '_', ' ', $key ) ); }
 	private function get_field_section( array|string $definition ): string { return is_array( $definition ) && isset( $definition['section'] ) ? $definition['section'] : ''; }
-	private function is_media_field( string $key, string $type ): bool { return 'url' === $type && (str_contains( $key, 'image' ) || str_contains( $key, 'logo' )); }
+	private function is_media_field( string $key, string $type ): bool { return 'url' === $type && (str_contains( $key, 'image' ) || str_contains( $key, 'logo' ) || str_contains( $key, 'video' )); }
 
 	private function render_input( string $name, string $value, string $type, string $id = '' ): void {
 		$id_attr = $id ? 'id="' . esc_attr( $id ) . '"' : '';
@@ -805,10 +812,10 @@ final class Frankies_Content_Manager {
 			echo '<textarea name="' . esc_attr( $name ) . '" ' . $id_attr . ' class="large-text" rows="8">' . esc_textarea( $value ) . '</textarea>';
 			return;
 		}
-		if ( 'url' === $type && (str_contains( $name, 'image' ) || str_contains( $name, 'logo' )) ) {
+		if ( 'url' === $type && (str_contains( $name, 'image' ) || str_contains( $name, 'logo' ) || str_contains( $name, 'video' )) ) {
 			echo '<div class="frankies-media-uploader">';
 			echo '<input type="url" name="' . esc_attr( $name ) . '" ' . $id_attr . ' value="' . esc_url( $value ) . '" class="regular-text frankies-media-url">';
-			echo '<button type="button" class="button frankies-upload-button">Select Image</button>';
+			echo '<button type="button" class="button frankies-upload-button">Select Image/Video</button>';
 			echo '</div>';
 			return;
 		}
@@ -830,7 +837,7 @@ final class Frankies_Content_Manager {
 				$(document).off('click.frankies_media').on('click.frankies_media', '.frankies-upload-button', function(e) {
 					e.preventDefault();
 					var button = $(this);
-					var custom_uploader = wp.media({ title: 'Select Image', button: { text: 'Use this image' }, multiple: false
+					var custom_uploader = wp.media({ title: 'Select Image or Video', library: { type: ['image','video'] }, button: { text: 'Use this media' }, multiple: false
 					}).on('select', function() {
 						var attachment = custom_uploader.state().get('selection').first().toJSON();
 						button.siblings('.frankies-media-url').val(attachment.url);

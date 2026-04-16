@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SlidingGallery from '../components/SlidingGallery';
+import MediaElement from '../components/MediaElement';
 import { API_BASE_URL } from '../config';
 import { getCache, setCache } from '../utils/cacheHelper';
 import Loading from '../components/Loading';
@@ -48,7 +49,7 @@ const AgouraHillsPage = () => {
         alignItems: 'center', justifyContent: 'center', overflow: 'hidden',
         background: '#1a1a1a', opacity: 1, visibility: 'visible'
       }}>
-        <img 
+        <MediaElement 
           src={heroImage} 
           alt="Frankie's Agoura Hills" 
           loading="eager"

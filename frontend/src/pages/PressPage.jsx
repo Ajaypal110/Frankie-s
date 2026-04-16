@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { API_BASE_URL } from '../config';
 import { getCache, setCache } from '../utils/cacheHelper';
+import MediaElement from '../components/MediaElement';
 import Loading from '../components/Loading';
 
 const PressPage = () => {
@@ -82,7 +83,7 @@ const PressPage = () => {
             return (
               <a key={idx} href={item.url} target="_blank" rel="noopener noreferrer" className="safe-hover-translate" style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>
                 <div className="press-image-container" style={{ width: '100%', height: '320px', borderRadius: '24px', overflow: 'hidden', backgroundColor: '#eee', marginBottom: '24px' }}>
-                  <img src={item.image} alt={item.source} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <MediaElement src={item.image} alt={item.source} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
                 <p style={{ fontFamily: '"Courier Prime", monospace', fontSize: 'clamp(14px, 2vw, 18px)', fontWeight: 700, textTransform: 'uppercase', color: '#000', marginBottom: '12px' }}>{item.source}</p>
                 <h3 style={{ fontFamily: '"Courier Prime", monospace', fontSize: 'clamp(13px, 1.8vw, 16px)', fontWeight: 700, lineHeight: 1.6, color: '#1a1a1a', marginBottom: '12px' }}>{item.headline}</h3>

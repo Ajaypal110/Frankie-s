@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import MediaElement from './MediaElement';
 
 const SlidingGallery = ({ galleryImages }) => {
   const scrollRef = useRef(null);
@@ -70,7 +71,7 @@ const SlidingGallery = ({ galleryImages }) => {
             overflow: 'hidden',
             borderRight: index !== images.length - 1 ? '1px solid #1a1a1a' : 'none'
           }}>
-            <img 
+            <MediaElement 
               src={src} 
               alt={`Frankies cuisine ${index + 1}`} 
               style={{
