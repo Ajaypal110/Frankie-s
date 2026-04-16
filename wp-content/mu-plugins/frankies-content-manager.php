@@ -187,6 +187,7 @@ final class Frankies_Content_Manager {
 			'footer_email'       => array( 'type' => 'email', 'label' => 'Contact Email', 'section' => 'Footer Settings' ),
 			'instagram_url'      => array( 'type' => 'url', 'label' => 'Instagram URL', 'section' => 'Social Links' ),
 			'facebook_url'       => array( 'type' => 'url', 'label' => 'Facebook URL', 'section' => 'Social Links' ),
+			'tiktok_url'         => array( 'type' => 'url', 'label' => 'TikTok URL', 'section' => 'Social Links' ),
 			'copyright_text'     => array( 'type' => 'text', 'label' => 'Copyright Text', 'section' => 'Legal & Footer Bottom' ),
 		);
 	}
@@ -702,6 +703,7 @@ final class Frankies_Content_Manager {
 			'footer_email'     => "INFO@FRANKIESMEXICAN.COM",
 			'instagram_url'    => "https://instagram.com",
 			'facebook_url'     => "https://facebook.com",
+			'tiktok_url'       => "https://www.tiktok.com/@frankies_burritos",
 			'copyright_text'   => "FRANKIE'S BURRITO. ALL RIGHTS RESERVED.",
 		);
 		return $this->get_data_merged( self::GLOBAL_OPTION, $defaults );

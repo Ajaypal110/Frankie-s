@@ -73,6 +73,7 @@ const Footer = () => {
               <span className="footer-link">{settings?.footer_email || "INFO@FRANKIESMEXICAN.COM"}</span>
               <a href={settings?.instagram_url || "https://instagram.com"} className="footer-link" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
               {settings?.facebook_url && <a href={settings.facebook_url} className="footer-link" target="_blank" rel="noopener noreferrer">FACEBOOK</a>}
+              <a href={settings?.tiktok_url || "https://www.tiktok.com/@frankies_burritos"} className="footer-link" target="_blank" rel="noopener noreferrer">TIKTOK</a>
               <a href={settings?.order_online_url || "#"} className="footer-link" target="_blank" rel="noopener noreferrer">ORDER ONLINE</a>
 
             </nav>
